@@ -1,12 +1,12 @@
-name: Digital Scholarship Unit
+name: Digital Scholarship Unit (subtheme from Porto
 type: theme
-description: 'This theme is for the new website of Digital Schoalrship Unit'
-package: Other
-#core: 8.x
-core_version_requirement: ^8 || ^9
+base theme: porto
+description: 'Theme for Digital Scholarship Unit Website'
+package: Custom
+# version: VERSION
+# core: 8.x
 libraries:
   - dsu/global-styling
-
 regions:
   header: 'Header'
   nav_top: 'Nav Top'
@@ -56,4 +56,9 @@ regions:
   footer_bottom_5: 'Footer bottom 5'
   footer_bottom_6: 'Footer bottom 6'
 
-base theme: []
+# Information added by Drupal.org packaging script on 2016-09-07
+version: '4.0.1'
+#core: '8.x'
+core_version_requirement: ^8 || ^9
+project: 'drupal'
+datestamp: 1473276445
