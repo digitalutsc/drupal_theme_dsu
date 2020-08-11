@@ -1,0 +1,9 @@
+name: Digital Scholarship Unit
+type: theme
+description: 'This theme is for the new website of Digital Schoalrship Unit'
+package: Other
+core: 8.x
+libraries:
+  - dsu/global-styling
+ 
+base theme: porto
