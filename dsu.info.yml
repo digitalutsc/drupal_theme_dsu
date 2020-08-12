@@ -8,6 +8,7 @@ package: Custom
 libraries:
   - dsu/global-styling
 regions:
+  site_branding: "Site Branding"
   header: 'Header'
   nav_top: 'Nav Top'
   search: 'Search'
