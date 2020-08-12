@@ -8,6 +8,7 @@ package: Custom
 libraries:
   - dsu/global-styling
 regions:
+  #exclusive for DSU
   site_branding: "Site Branding"
   header: 'Header'
   nav_top: 'Nav Top'
@@ -18,6 +19,7 @@ regions:
   header_social: 'Header Social'
   slide_show: 'Slide Show'
   slider_contact_form: 'Slider Contact Form'
+  slogan: "Slogan/ Highlighted Messages"
   breadcrumb: 'Breadcrumb'
   before_content : 'Before Content'
   content: 'Content'

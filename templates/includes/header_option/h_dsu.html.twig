@@ -32,6 +32,12 @@
                 </nav>
               {% endif %}
             </div>
+            <!-- exclusive for DSU -->
+            {% if page.site_branding %}
+              <div class="header-row">
+                {{ page.site_branding }}
+              </div>
+            {% endif %}
 
             <!-- Primary Menu + Header Social -->
             <div class="header-row">
@@ -46,11 +52,6 @@
                   </div>
                 {% endif %}
                 <div class="header-nav-main header-nav-main-effect-1 header-nav-main-sub-effect-1 collapse">
-                  {% if page.site_branding %}
-                    <div class="header-row">
-                      {{ page.site_branding }}
-                    </div>
-                  {% endif %}
                   {% if page.primary_menu %}
                     {{ page.primary_menu }}
                   {% endif %}

@@ -4,24 +4,17 @@
     {% if page.slide_show %}
       {{ page.slide_show }}
     {% endif %}
-    {% if page_title %}
-      <!--breadcrumbs-->
-      {% if page.breadcrumb %}
-        <section class="page-header">
-          <div class="container">
-            <div class="row">
-              <div class="col-md-12">
-                {{ page.breadcrumb }}
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-md-12">
-                <h1>{{ page_title }}</h1>
-              </div>
-            </div>
-          </div>
-        </section>
-      {% endif %}
+
+    {% if page.slogan %}
+      <section class="page-header slogan">
+        <div class="container">
+          {{ page.slogan }}
+        </div>
+      </section>
+    {% else %}
+      <div style="padding:20px 0">
+
+      </div>
     {% endif %}
 
     {% if messages %}
@@ -83,7 +76,7 @@
 
     {% else %}
       <!--content-->
-      <div>
+      <div class="container">
         {{ page.content }}
       </div>
     {% endif %}
@@ -93,4 +86,6 @@
   </div>
   {% include directory ~ '/templates/includes/footer.html.twig' %}
 </div>
+
+
 

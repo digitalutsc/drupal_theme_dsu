@@ -1,8 +1,13 @@
 /*=======================================================================
 *** DSU STYLE SHEET***
 ========================================================================*/
-.site-branding__text h1.dsu {
+.site-branding__text {
   text-align: center;
-  margin: 0 0 10px 0 !important;
+  margin-bottom: 10px !important;
+  font-size: 2.5em;
+  font-family: "Times New Roman",Times,serif;
+  font-weight: 100;
 }
-
+.slogan{
+  background-color: #ffffff;
+}
