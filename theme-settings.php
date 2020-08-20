@@ -32,6 +32,13 @@ function dsu_form_system_theme_settings_alter(&$form, Drupal\Core\Form\FormState
 
 }
 
+function dsu_preprocess_node(&$variable) {
+    var_dump(dsu_preprocess_node);
+     if ($variable['node']->getType() === 'portfolio') {
+         
+     }
+}
+
 
 /**
  * Debug function: display any variable to error log

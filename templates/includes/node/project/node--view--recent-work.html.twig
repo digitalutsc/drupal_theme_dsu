@@ -1,0 +1,9 @@
+{% set thumbnail = node.field_thumbnail %}
+
+<div>
+    {% if content.field_thumbnail | render %}
+        <a href="{{ url }}">
+            <img alt="" class="img-responsive" src="{{ file_url(node.field_thumbnail.entity.fileuri) }}">
+        </a>
+    {% endif %}
+</div>
