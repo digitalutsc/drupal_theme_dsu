@@ -1,5 +1,4 @@
 {% set layout_mode = content.field_layout_mode['#items'].getValue()|first.value %}
-
 {% if layout_mode != 'left_sidebar' and layout_mode != 'right_sidebar' and layout_mode != 'left_right_sidebar' and layout_mode != 'sticky_sidebar' %}
 	<div class="container">
 		<div class="row">
@@ -7,11 +6,11 @@
 				<div class="portfolio-title {% if layout_mode == 'extended' %} mb-xs {% endif %}">
 					<div class="row">
 						<div class="portfolio-nav-all col-md-1">
-							<a href="{{ base_url }}/portfolio-grid-full-width" data-tooltip data-original-title="{{ 'Back to list' | t }}">
+							<a href="{{ base_url }}/projects" data-tooltip data-original-title="{{ 'Back to list' | t }}">
 								<i class="fa fa-th"></i>
 							</a>
 						</div>
-						<div class="col-md-10 center">
+						<div class="col-md-10 left">
 							<h2 class="mb-none">{{ label }}</h2>
 						</div>
 						<div class="portfolio-nav col-md-1">
@@ -66,22 +65,21 @@
 					</div>
 				</div>
 				<h5 class="mt-sm">{{ 'Project Description' | t }}</h5>
-				<div class="mt-xlg">{{ content.body }}</div>
-				<a target="_blank" href="{{ content.field_portfolio_link | render | striptags}}" class="btn btn-primary btn-icon"><i class="fa fa-external-link"></i>{{ 'Project Link' | t }}</a> <span class="arrow hlb appear-animation" data-appear-animation="rotateInUpLeft" data-appear-animation-delay="800"></span>
+				<div class="mt-xlg">{{ content.body | render }}</div>
+				<a target ="_blank" href="{{ content.field_portfolio_link | render | striptags}}" class="btn btn-primary btn-icon"><i class="fa fa-external-link"></i>{{ 'Project Link' | t }}</a> <span class="arrow hlb appear-animation" data-appear-animation="rotateInUpLeft" data-appear-animation-delay="800"></span>
 				<ul class="portfolio-details">
-					{{ content.field_portfolio_skills.value }}
-					{% if content.field_portfolio_skills is not empty %}
+					{% if content.field_portfolio_skills | render %}
 					<li>
-						<h5 class="mt-sm mb-xs">{{ 'Keywords' | t }}</h5>
+						<h5 class="mt-sm mb-xs">{{ 'Skills' | t }}</h5>
 						{{ content.field_portfolio_skills }}
 					</li>
-					{% endif %}
-					{% if content.field_portfolio_client is not empty %}
+					{%  endif %}
+					{% if content.field_portfolio_client | render %}
 					<li>
-						<h5 class="mt-sm mb-xs">{{ 'Staffs' | t }}</h5>
+						<h5 class="mt-sm mb-xs">{{ 'Client' | t }}</h5>
 						<p>{{ content.field_portfolio_client | render | striptags}}</p>
 					</li>
-					{% endif %}
+					{%  endif %}
 				</ul>
 			</div>
 		</div>
@@ -125,26 +123,33 @@
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-md-7">
+			<div class="{{ (content.field_portfolio_client | render) ? 'col-md-7' : 'col-md-12'  }}">
 				<h5 class="mt-lg mb-sm">{{ 'Project Description' | t }}</h5>
-				<div class="mt-none mb-xlg">{{ content.body | render | striptags }}</div>
-				<a target="_blank" href="{{ content.field_portfolio_link | render | striptags}}" class="btn btn-primary btn-icon"><i class="fa fa-external-link"></i>{{ 'Live Preview' | t }}</a> <span class="arrow hlb appear-animation" data-appear-animation="rotateInUpLeft" data-appear-animation-delay="800"></span>
+				<div class="mt-none mb-xlg">{{ content.body | render }}</div>
+				<a target ="_blank" href="{{ content.field_portfolio_link | render | striptags}}" class="btn btn-primary btn-icon"><i class="fa fa-external-link"></i>{{ 'Project Link' | t }}</a> <span class="arrow hlb appear-animation" data-appear-animation="rotateInUpLeft" data-appear-animation-delay="800"></span>
 				<ul class="portfolio-details">
+
+					{% if content.field_portfolio_skills | render %}
 					<li>
 						<h5 class="mt-sm mb-xs">{{ 'Skills' | t }}</h5>
 						{{ content.field_portfolio_skills }}
 					</li>
+					{%  endif %}
 				</ul>
 			</div>
-			<div class="col-md-5">
-				<ul class="portfolio-details mt-none mb-xl">
-					<li>
-						<h5 class="mt-lg mb-sm">{{ 'Client' | t }}</h5>
-						<p>{{ content.field_portfolio_client | render | striptags}} - <a href="{{ content.field_portfolio_client_link | render | striptags}}" target="_blank"><i class="fa fa-external-link"></i> {{ content.field_portfolio_client_link | render | striptags}}</a></p>
-					</li>
-				</ul>
-				{{ content.field_portfolio_testimonial }}
-			</div>
+			{% if content.field_portfolio_client | render %}
+				<div class="col-md-5">
+					<ul class="portfolio-details mt-none mb-xl">
+
+						<li>
+							<h5 class="mt-lg mb-sm">{{ 'Client' | t }}</h5>
+							<p>{{ content.field_portfolio_client | render | striptags}} - <a href="{{ content.field_portfolio_client_link | render | striptags}}" target="_blank"><i class="fa fa-external-link"></i> {{ content.field_portfolio_client_link | render | striptags}}</a></p>
+						</li>
+
+					</ul>
+					{{ content.field_portfolio_testimonial }}
+				</div>
+			{%  endif %}
 		</div>
 		{{ related_portfolio }}
 	</div>
@@ -181,18 +186,20 @@
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-md-7">
+			<div class="{{ (content.field_portfolio_client | render) ? 'col-md-7' : 'col-md-12'  }}">
 				<h5 class="mt-lg mb-sm">{{ 'Project Description' | t }}</h5>
-				<div class="mt-none mb-xlg">{{ content.body | render | striptags }}</div>
-				<a target="_blank" href="{{ content.field_portfolio_link | render | striptags}}" class="btn btn-primary btn-icon"><i class="fa fa-external-link"></i>{{ 'Live Preview' | t }}</a> <span class="arrow hlb appear-animation" data-appear-animation="rotateInUpLeft" data-appear-animation-delay="800"></span>
+				<div class="mt-none mb-xlg">{{ content.body | render }}</div>
+				{% if content.field_portfolio_skills | render %}
+				<a target ="_blank" href="{{ content.field_portfolio_link | render | striptags}}" class="btn btn-primary btn-icon"><i class="fa fa-external-link"></i>{{ 'Project Link' | t }}</a> <span class="arrow hlb appear-animation" data-appear-animation="rotateInUpLeft" data-appear-animation-delay="800"></span>
 				<ul class="portfolio-details">
 					<li>
 						<h5 class="mt-sm mb-xs">{{ 'Skills' | t }}</h5>
 						{{ content.field_portfolio_skills }}
 					</li>
 				</ul>
-
+				{% endif %}
 			</div>
+			{% if content.field_portfolio_client | render %}
 			<div class="col-md-5">
 				<ul class="portfolio-details mt-none mb-xl">
 					<li>
@@ -202,6 +209,7 @@
 				</ul>
 				{{ content.field_portfolio_testimonial }}
 			</div>
+			{% endif %}
 		</div>
 		{{ related_portfolio }}
 	</div>
@@ -250,26 +258,31 @@
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-md-7">
+			<div class="{{ (content.field_portfolio_client | render) ? 'col-md-7' : 'col-md-12'  }}">
 				<h5 class="mt-lg mb-sm">{{ 'Project Description' | t }}</h5>
-				<div class="mt-none mb-xlg">{{ content.body | render | striptags }}</div>
-				<a target="_blank" href="{{ content.field_portfolio_link | render | striptags}}" class="btn btn-primary btn-icon"><i class="fa fa-external-link"></i>{{ 'Live Preview' | t }}</a> <span class="arrow hlb appear-animation" data-appear-animation="rotateInUpLeft" data-appear-animation-delay="800"></span>
+				<div class="mt-none mb-xlg">{{ content.body | render }}</div>
+				<a target ="_blank" href="{{ content.field_portfolio_link | render | striptags}}" class="btn btn-primary btn-icon"><i class="fa fa-external-link"></i>{{ 'Project Link' | t }}</a> <span class="arrow hlb appear-animation" data-appear-animation="rotateInUpLeft" data-appear-animation-delay="800"></span>
 				<ul class="portfolio-details">
+					{% if content.field_portfolio_skills | render %}
 					<li>
 						<h5 class="mt-sm mb-xs">{{ 'Skills' | t }}</h5>
 						{{ content.field_portfolio_skills }}
 					</li>
+					{% endif %}
 				</ul>
 			</div>
+			{% if content.field_portfolio_client | render %}
 			<div class="col-md-5">
 				<ul class="portfolio-details mt-none mb-xl">
 					<li>
 						<h5 class="mt-lg mb-sm">{{ 'Client' | t }}</h5>
 						<p>{{ content.field_portfolio_client | render | striptags}} - <a href="{{ content.field_portfolio_client_link | render | striptags}}" target="_blank"><i class="fa fa-external-link"></i> {{ content.field_portfolio_client_link | render | striptags}}</a></p>
 					</li>
+
 				</ul>
 				{{ content.field_portfolio_testimonial }}
 			</div>
+			{% endif %}
 		</div>
 	</div>
 {% elseif layout_mode == 'carousel' %}
@@ -312,22 +325,26 @@
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-md-9">
+			<div class="{{ (content.field_portfolio_client | render) ? 'col-md-9' : 'col-md-12'  }}">
 				<h5 class="mt-lg mb-sm">{{ 'Project Description' | t }}</h5>
-				<div class="mt-none mb-xlg">{{ content.body | render | striptags }}</div>
-				<a target="_blank" href="{{ content.field_portfolio_link | render | striptags}}" class="btn btn-primary btn-icon"><i class="fa fa-external-link"></i>{{ 'Live Preview' | t }}</a> <span class="arrow hlb appear-animation" data-appear-animation="rotateInUpLeft" data-appear-animation-delay="800"></span>
+				<div class="mt-none mb-xlg">{{ content.body | render }}</div>
+				<a target ="_blank" href="{{ content.field_portfolio_link | render | striptags}}" class="btn btn-primary btn-icon"><i class="fa fa-external-link"></i>{{ 'Project Link' | t }}</a> <span class="arrow hlb appear-animation" data-appear-animation="rotateInUpLeft" data-appear-animation-delay="800"></span>
+				{% if content.field_portfolio_client | render %}
 				<ul class="portfolio-details">
 					<li>
 						<h5 class="mt-sm mb-xs">{{ 'Skills' | t }}</h5>
 						{{ content.field_portfolio_skills }}
 					</li>
 				</ul>
+				{% endif %}
+				{% if content.field_portfolio_client | render %}
 				<ul class="portfolio-details mt-none mb-xl">
 					<li>
 						<h5 class="mt-lg mb-sm">{{ 'Client' | t }}</h5>
 						<p>{{ content.field_portfolio_client | render | striptags}} - <a href="{{ content.field_portfolio_client_link | render | striptags}}" target="_blank"><i class="fa fa-external-link"></i> {{ content.field_portfolio_client_link | render | striptags}}</a></p>
 					</li>
 				</ul>
+				{% endif %}
 			</div>
 			<div class="col-md-3">
 				{{ related_portfolio_carousel }}
@@ -404,20 +421,24 @@
 		<div class="row">
 			<div class="col-md-9">
 				<h5 class="mt-lg mb-sm">{{ 'Project Description' | t }}</h5>
-				<div class="mt-none mb-xlg">{{ content.body | render | striptags }}</div>
-				<a target="_blank" href="{{ content.field_portfolio_link | render | striptags}}" class="btn btn-primary btn-icon"><i class="fa fa-external-link"></i>{{ 'Live Preview' | t }}</a> <span class="arrow hlb appear-animation" data-appear-animation="rotateInUpLeft" data-appear-animation-delay="800"></span>
+				<div class="mt-none mb-xlg">{{ content.body | render }}</div>
+				<a target ="_blank" href="{{ content.field_portfolio_link | render | striptags}}" class="btn btn-primary btn-icon"><i class="fa fa-external-link"></i>{{ 'Project Link' | t }}</a> <span class="arrow hlb appear-animation" data-appear-animation="rotateInUpLeft" data-appear-animation-delay="800"></span>
+				{% if content.field_portfolio_client | render %}
 				<ul class="portfolio-details">
 					<li>
 						<h5 class="mt-sm mb-xs">{{ 'Skills' | t }}</h5>
 						{{ content.field_portfolio_skills }}
 					</li>
 				</ul>
+				{% endif %}
+				{% if content.field_portfolio_client | render %}
 				<ul class="portfolio-details mt-none mb-xl">
 					<li>
 						<h5 class="mt-lg mb-sm">{{ 'Client' | t }}</h5>
 						<p>{{ content.field_portfolio_client | render | striptags}} - <a href="{{ content.field_portfolio_client_link | render | striptags}}" target="_blank"><i class="fa fa-external-link"></i> {{ content.field_portfolio_client_link | render | striptags}}</a></p>
 					</li>
 				</ul>
+				{% endif %}
 			</div>
 			<div class="col-md-3">
 				{{ related_portfolio_carousel }}
@@ -490,19 +511,23 @@
 		<div class="row">
 			<div class="col-md-9">
 				<h5 class="mt-lg mb-sm">{{ 'Project Description' | t }}</h5>
-				<div class="mt-none mb-xlg">{{ content.body | render | striptags }}</div>
-				<a target="_blank" href="{{ content.field_portfolio_link | render | striptags}}" class="btn btn-primary btn-icon"><i class="fa fa-external-link"></i>{{ 'Live Preview' | t }}</a> <span class="arrow hlb appear-animation" data-appear-animation="rotateInUpLeft" data-appear-animation-delay="800"></span>
+				<div class="mt-none mb-xlg">{{ content.body | render }}</div>
+				<a target ="_blank" href="{{ content.field_portfolio_link | render | striptags}}" class="btn btn-primary btn-icon"><i class="fa fa-external-link"></i>{{ 'Project Link' | t }}</a> <span class="arrow hlb appear-animation" data-appear-animation="rotateInUpLeft" data-appear-animation-delay="800"></span>
 				<ul class="portfolio-details">
+					{% if content.field_portfolio_client | render %}
 					<li>
 						<h5 class="mt-sm mb-xs">{{ 'Skills' | t }}</h5>
 						{{ content.field_portfolio_skills }}
 					</li>
+					{% endif %}
 				</ul>
 				<ul class="portfolio-details mt-none mb-xl">
+					{% if content.field_portfolio_client | render %}
 					<li>
 						<h5 class="mt-lg mb-sm">{{ 'Client' | t }}</h5>
 						<p>{{ content.field_portfolio_client | render | striptags}} - <a href="{{ content.field_portfolio_client_link | render | striptags}}" target="_blank"><i class="fa fa-external-link"></i> {{ content.field_portfolio_client_link | render | striptags}}</a></p>
 					</li>
+					{% endif %}
 				</ul>
 				{{ content.field_portfolio_testimonial }}
 			</div>
@@ -571,19 +596,23 @@
 					</ul>
 				</div>
 				<h5 class="mt-lg mb-sm">{{ 'Project Description' | t }}</h5>
-				<div class="mt-none mb-xlg">{{ content.body | render | striptags }}</div>
-				<a target="_blank" href="{{ content.field_portfolio_link | render | striptags}}" class="btn btn-primary btn-icon"><i class="fa fa-external-link"></i>{{ 'Live Preview' | t }}</a> <span class="arrow hlb appear-animation" data-appear-animation="rotateInUpLeft" data-appear-animation-delay="800"></span>
+				<div class="mt-none mb-xlg">{{ content.body | render }}</div>
+				<a target ="_blank" href="{{ content.field_portfolio_link | render | striptags}}" class="btn btn-primary btn-icon"><i class="fa fa-external-link"></i>{{ 'Project Link' | t }}</a> <span class="arrow hlb appear-animation" data-appear-animation="rotateInUpLeft" data-appear-animation-delay="800"></span>
 				<ul class="portfolio-details">
+					{% if content.field_portfolio_client | render %}
 					<li>
 						<h5 class="mt-sm mb-xs">{{ 'Skills' | t }}</h5>
 						{{ content.field_portfolio_skills }}
 					</li>
+					{% endif %}
 				</ul>
 				<ul class="portfolio-details mt-none mb-xl">
+					{% if content.field_portfolio_client | render %}
 					<li>
 						<h5 class="mt-lg mb-sm">{{ 'Client' | t }}</h5>
 						<p>{{ content.field_portfolio_client | render | striptags}} - <a href="{{ content.field_portfolio_client_link | render | striptags}}" target="_blank"><i class="fa fa-external-link"></i> {{ content.field_portfolio_client_link | render | striptags}}</a></p>
 					</li>
+					{% endif %}
 				</ul>
 			</div>
 		</div>
@@ -686,12 +715,14 @@
 					</div>
 					<h5 class="mt-xl">{{ 'Project Description' | t }}</h5>
 					<div class="mt-xlg">{{ content.body }}</div>
-					<a target="_blank" href="{{ content.field_portfolio_link | render | striptags}}" class="btn btn-primary btn-icon"><i class="fa fa-external-link"></i>{{ 'Live Preview' | t }}</a> <span class="arrow hlb appear-animation" data-appear-animation="rotateInUpLeft" data-appear-animation-delay="800"></span>
+					<a target ="_blank" href="{{ content.field_portfolio_link | render | striptags}}" class="btn btn-primary btn-icon"><i class="fa fa-external-link"></i>{{ 'Project Link' | t }}</a> <span class="arrow hlb appear-animation" data-appear-animation="rotateInUpLeft" data-appear-animation-delay="800"></span>
 					<ul class="portfolio-details">
+					{% if content.field_portfolio_client | render %}
 						<li>
 							<h5 class="mt-sm mb-xs">{{ 'Skills' | t }}</h5>
 							{{ content.field_portfolio_skills }}
 						</li>
+						{% endif %}
 					</ul>
 				</aside>
 			</div>
@@ -703,21 +734,25 @@
 		<div class="row">
 			<div class="col-md-7">
 				<h5 class="mt-lg mb-sm">{{ 'More Information' | t }}</h5>
-				<div class="mt-none mb-xlg">{{ content.body | render | striptags }}</div>
-				<a href="#" class="btn btn-primary btn-icon"><i class="fa fa-external-link"></i>{{ 'Live Preview' | t }}</a> <span class="arrow hlb appear-animation" data-appear-animation="rotateInUpLeft" data-appear-animation-delay="800"></span>
+				<div class="mt-none mb-xlg">{{ content.body | render }}</div>
+				<a href="#" class="btn btn-primary btn-icon"><i class="fa fa-external-link"></i>{{ 'Project Link' | t }}</a> <span class="arrow hlb appear-animation" data-appear-animation="rotateInUpLeft" data-appear-animation-delay="800"></span>
 				<ul class="portfolio-details">
+					{% if content.field_portfolio_client | render %}
 					<li>
 						<h5 class="mt-sm mb-xs">{{ 'Skills' | t }}</h5>
 						{{ content.field_portfolio_skills }}
 					</li>
+					{% endif %}
 				</ul>
 			</div>
 			<div class="col-md-5">
 				<ul class="portfolio-details mt-none mb-xl">
+					{% if content.field_portfolio_client | render %}
 					<li>
 						<h5 class="mt-lg mb-sm">{{ 'Client' | t }}</h5>
 						<p>{{ content.field_portfolio_client | render | striptags}} - <a href="{{ content.field_portfolio_client_link | render | striptags}}" target="_blank"><i class="fa fa-external-link"></i> {{ content.field_portfolio_client_link | render | striptags}}</a></p>
 					</li>
+					{% endif %}
 				</ul>
 				{{ content.field_portfolio_testimonial }}
 			</div>
