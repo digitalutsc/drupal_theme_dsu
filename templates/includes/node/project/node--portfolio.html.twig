@@ -617,6 +617,68 @@
 			</div>
 		</div>
 	</div>
+{% elseif layout_mode == 'masonry_images_right' %}
+	<div class="container">
+		<div class="row">
+			<div class="col-md-7">
+				<div class="portfolio-info pull-none">
+					<ul>
+						<li>
+							<i class="fa fa-calendar"></i>
+							{% set createdDate = node.getCreatedTime|date('d F Y') %}
+							{{ createdDate }}
+						</li>
+						<li>
+							<i class="fa fa-tags"></i>
+							{{ content.field_tags }}
+						</li>
+					</ul>
+				</div>
+				<h5 class="mt-lg mb-sm">{{ 'Project Description' | t }}</h5>
+				<div class="mt-none mb-xlg">{{ content.body | render }}</div>
+				<a target ="_blank" href="{{ content.field_portfolio_link | render | striptags}}" class="btn btn-primary btn-icon"><i class="fa fa-external-link"></i>{{ 'Project Link' | t }}</a> <span class="arrow hlb appear-animation" data-appear-animation="rotateInUpLeft" data-appear-animation-delay="800"></span>
+				<ul class="portfolio-details">
+					{% if content.field_portfolio_client | render %}
+					<li>
+						<h5 class="mt-sm mb-xs">{{ 'Skills' | t }}</h5>
+						{{ content.field_portfolio_skills }}
+					</li>
+					{% endif %}
+				</ul>
+				<ul class="portfolio-details mt-none mb-xl">
+					{% if content.field_portfolio_client | render %}
+					<li>
+						<h5 class="mt-lg mb-sm">{{ 'Client' | t }}</h5>
+						<p>{{ content.field_portfolio_client | render | striptags}} - <a href="{{ content.field_portfolio_client_link | render | striptags}}" target="_blank"><i class="fa fa-external-link"></i> {{ content.field_portfolio_client_link | render | striptags}}</a></p>
+					</li>
+					{% endif %}
+				</ul>
+			</div>
+			<div class="col-md-5">
+				<div class="lightbox" data-plugin-options='{"delegate": "a.lightbox-portfolio", "type": "image", "gallery": {"enabled": true}}'>
+					<div class="masonry-loader masonry-loader-showing">
+						<div class="masonry" data-plugin-masonry data-plugin-options='{"itemSelector": ".masonry-item"}'>
+							{% set images = node.field_image %}
+							{% for image  in images %}
+							<div class="masonry-item">
+								<span class="thumb-info thumb-info-centered-icons thumb-info-no-borders">
+									<span class="thumb-info-wrapper">
+										<img src="{{ file_url(image.entity.fileuri) }}" class="img-responsive" alt="">
+										<span class="thumb-info-action">
+											<a href="{{ file_url(image.entity.fileuri) }}" class="lightbox-portfolio">
+												<span class="thumb-info-action-icon thumb-info-action-icon-light"><i class="fa fa-search-plus"></i></span>
+											</a>
+										</span>
+									</span>
+								</span>
+							</div>
+							{% endfor %}
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 {% elseif layout_mode == 'left_sidebar' or layout_mode == 'right_sidebar' or layout_mode == 'left_right_sidebar' %}
 	<div class="container">
 		<div class="row">
