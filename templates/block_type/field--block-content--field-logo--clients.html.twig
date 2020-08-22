@@ -1,0 +1,7 @@
+{% for key, item in items %}
+    {% set img = file_url(item.content['#field_collection_item'].field_image.entity.fileuri) %}
+
+    <div class="content-grid-item col-md-4 center">
+        <img class="img-responsive" src="{{ img }}" alt="">
+    </div>
+{% endfor %}

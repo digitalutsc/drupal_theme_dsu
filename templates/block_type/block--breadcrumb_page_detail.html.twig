@@ -1,0 +1,23 @@
+
+{%
+set classes = [
+'block',
+'block-' ~ configuration.provider|clean_class,
+'block-' ~ plugin_id|clean_class,
+]
+
+%}
+<div{{ attributes.addClass(classes) }}>
+    {{ title_prefix }}
+    <section class="section section-text-light section-default section-default-scale-8 section-center mt-none mb-none">
+        <div class="container">
+            <div class="row mt-xl">
+                <div class="col-md-8 col-md-offset-2 mt-xlg">
+                    <div class="mt-xlg font-weight-semibold text-uppercase">{{ drupal_region('page_title') }}</div>
+                    {{ content.body }}
+                </div>
+            </div>
+        </div>
+    </section>
+    {{ title_suffix }}
+</div>

@@ -1,0 +1,4 @@
+{% for key, item in items %}
+    {% set img_two = file_url(item.content['#item'].entity.fileuri) %}
+    <img class="img-responsive mb-xl" src="{{ img_two }}" alt="Office">
+{% endfor %}

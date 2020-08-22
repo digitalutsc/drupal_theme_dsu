@@ -1,8 +1,6 @@
 {% set thumbnail = row._entity.field_thumbnail %}
 {% set categoryIds = fields.field_portfolio_category.content|split(',') %}
-*********views-view-fields--portfolio-pages-jdljdsaklfjasdlfjasldfjlks-page_grid_3columns.html.twig
 
-**************
 <li class="col-md-4 isotope-item {% for categoryId in categoryIds %}{{ 'category' }}{{ categoryId|trim }} {% endfor %}">
     <div class="portfolio-item">
         <a href="{{ fields.path.content }}">

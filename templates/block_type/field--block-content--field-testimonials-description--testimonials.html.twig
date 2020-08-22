@@ -1,0 +1,13 @@
+{% for key, item in items %}
+    {% set avatar = file_url(item.content['#field_collection_item'].field_avatar.entity.fileuri) %}
+    <div class="col-md-4">
+        <div class="testimonial testimonial-style-2 appear-animation" data-appear-animation="fadeInUp" data-appear-animation-delay="300">
+            {{ item.content['#field_collection_item'].field_description.value | raw }}
+            <div class="testimonial-arrow-down"></div>
+            <div class="testimonial-author">
+                <img src="{{ avatar }}" class="img-responsive img-circle" alt="">
+                <p><strong>{{ item.content['#field_collection_item'].field_title.value | raw}}</strong><span>{{ item.content['#field_collection_item'].field_job.value | raw }}</span></p>
+            </div>
+        </div>
+    </div>
+{% endfor %}

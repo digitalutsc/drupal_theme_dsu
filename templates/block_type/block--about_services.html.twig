@@ -1,0 +1,31 @@
+{%
+set classes = [
+'block',
+'block-' ~ configuration.provider|clean_class,
+'block-' ~ plugin_id|clean_class,
+]
+
+%}
+<div{{ attributes.addClass(classes) }}>
+    {{ title_prefix }}
+    <section class="section section-default mt-none">
+        <div class="container">
+            <div class="row">
+                <div class="counters">
+                    {% if content.body | render %}
+                    <div class="col-md-10">
+                        {{ content.body }}
+                    </div>
+                    {% endif %}
+                    {% if content.field_image | render %}
+                    <div class="col-md-2 center">
+                        <img src="{{ content.field_image | render | striptags | trim }}" class="img-responsive mt-xs" />
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </section>
+
+    {{ title_suffix }}
+</div>

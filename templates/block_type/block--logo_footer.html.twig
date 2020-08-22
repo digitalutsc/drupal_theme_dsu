@@ -1,0 +1,17 @@
+{%
+set classes = [
+'block',
+'block-' ~ configuration.provider|clean_class,
+'block-' ~ plugin_id|clean_class,
+]
+
+%}
+<div{{ attributes.addClass(classes) }}>
+    {{ title_prefix }}
+    {% if content.field_image | render %}
+    <a href="{{ content.field_link | render | striptags | trim }}" class="logo">
+        <img alt="Porto Website Template" class="img-responsive" src="{{ content.field_image | render | striptags | trim }}">
+    </a>
+    {% endif %}
+    {{ title_suffix }}
+</div>

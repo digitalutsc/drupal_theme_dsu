@@ -1,0 +1,32 @@
+{%
+set classes = [
+'block',
+'block-' ~ configuration.provider|clean_class,
+'block-' ~ plugin_id|clean_class,
+]
+
+%}
+<div{{ attributes.addClass(classes) }}>
+    {{ title_prefix }}
+    <section class="section section-default section-footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 center">
+                    <h2 class="mb-none mt-xl font-weight-semibold">Clients.</h2>
+                    <p class="lead mb-none">Pellentesque pellentesque eget tempor tellus. </p>
+                    <div class="divider divider-primary divider-small divider-small-center mb-xl">
+                        <hr>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-lg">
+                <div class="content-grid content-grid-dashed mt-xlg mb-lg">
+                    <div class="row content-grid-row">
+                        {{ content.field_logo }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    {{ title_suffix }}
+</div>

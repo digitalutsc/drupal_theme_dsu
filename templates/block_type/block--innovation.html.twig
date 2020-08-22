@@ -1,0 +1,28 @@
+{%
+set classes = [
+'block',
+'block-' ~ configuration.provider|clean_class,
+'block-' ~ plugin_id|clean_class,
+]
+
+%}
+<div{{ attributes.addClass(classes) }}>
+    {{ title_prefix }}
+    <section class="section section-default section-footer section-color-custom mt-none">
+        <div class="container">
+            <div class="row mt-xl">
+                {% if content.field_image | render %}
+                <div class="col-md-4">
+                    <img class="img-responsive appear-animation" src="{{ content.field_image | render | striptags | trim }}" alt="layout styles" data-appear-animation="fadeInLeft">
+                </div>
+                {% endif %}
+                {% if content.body | render %}
+                <div class="col-md-7 col-md-offset-1">
+                    {{ content.body }}
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </section>
+    {{ title_suffix }}
+</div>
