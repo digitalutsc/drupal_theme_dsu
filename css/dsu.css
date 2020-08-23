@@ -3,10 +3,13 @@
 ========================================================================*/
 .site-branding__text {
   text-align: center;
-  margin-bottom: 10px !important;
   font-size: 2.5em;
   font-family: "Times New Roman",Times,serif;
   font-weight: 100;
+}
+.site-branding__text h6 {
+    color:#002554 !important;
+    margin: 0 !important;
 }
 .slogan{
   background-color: #ffffff;
