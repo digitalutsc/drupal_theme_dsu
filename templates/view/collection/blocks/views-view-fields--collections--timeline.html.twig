@@ -1,0 +1,99 @@
+{% set thumbnail = row._entity.field_thumbnail %}
+{% set images = row._entity.field_image %}
+{% set tagsContent = fields.field_tags.content|raw %}
+{% set title = fields.title.content %}
+{% set summary = fields.body.content %}
+{% set link = fields.field_text_link.content %}
+
+
+<div class="row">
+
+    <div class="col-md-12">
+
+        {% if display == 'gallery' %}
+
+            {% if images|length %}
+                <div class="post-image">
+                    <div class="owl-carousel owl-theme" data-plugin-options='{"items":1}'>
+                        {% for image  in images %}
+                            <div>
+                                <div class="img-thumbnail">
+                                    <img class="img-responsive" src="{{ file_url(image.entity.fileuri) }}" alt="">
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            {% endif %}
+
+        {% elseif display == 'video' %}
+
+            {% if medias|length %}
+                <div class="post-video">
+                    {{ medias|first.value|raw }}
+                </div>
+            {% endif %}
+
+        {% elseif display == 'audio' %}
+
+            {% if medias|length %}
+                <div class="post-audio">
+                    {{ medias|first.value|raw }}
+                </div>
+            {% endif %}
+
+        {% elseif display == 'quote' %}
+
+            {% if medias|length %}
+                {{ medias|first.value|raw }}
+            {% endif %}
+
+        {% else %}
+
+            {% if thumbnail.entity.fileuri %}
+                <div class="post-image single">
+                    <img class="img-thumbnail" src="{{ file_url(thumbnail.entity.fileuri) }}" alt="">
+                </div>
+            {% else %}
+                <div class="post-image single">
+                    <img class="img-thumbnail" src="http://placehold.it/1280x500" alt="">
+                </div>
+            {% endif %}
+
+        {% endif %}
+
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+
+        <div class="post-content">
+            <h4 class="heading-primary"><a href="{{ path }}">{{ title }}</a></h4>
+            <p>{{ summary }}</p>
+        </div>
+
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="post-meta">
+            <span><i class="fa fa-calendar"></i> {{ createdDate_d }} </span><br>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="post-meta">
+            <span><i class="fa fa-user"></i> By {{ author }} </span>
+            {% if tags|length %}
+                <span><i class="fa fa-tag"></i> {{ tagsContent }} </span>
+            {% endif %}
+            <span><i class="fa fa-comments"></i> <a href="{{ path }}#commentForm">{{ commentCount }} Comments</a></span>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <a href="{{ path }}" class="btn btn-xs btn-primary pull-right">Read more...</a>
+    </div>
+</div>

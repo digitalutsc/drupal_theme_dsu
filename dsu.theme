@@ -1,0 +1,8 @@
+
+<?php
+
+global $base_url;
+$theme_root = $base_url.'/'.drupal_get_path('theme','dsu');
+function dsu_preprocess_menu(&$variables) {
+    var_dump(dsu_preprocess_menu);
+}

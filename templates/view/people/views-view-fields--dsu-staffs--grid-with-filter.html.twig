@@ -1,0 +1,34 @@
+{% set thumbnail = row._entity.user_picture %}
+{% set position = fields.field_people_position.content %}
+
+<div class="col-md-3 col-sm-6 col-xs-12 isotope-item {{ position | replace({' ': '-'}) }}">
+    <span class="thumb-info thumb-info-hide-wrapper-bg">
+        <span class="thumb-info-wrapper">
+            <a href="{{ url }}">
+
+                    <img src="{{ file_url(thumbnail.entity.fileuri) }}" alt="" class="img-responsive">
+
+                <span class="thumb-info-title">
+                    <span class="thumb-info-inner">{{ fields.field_people_fname.content }} {{ fields.field_people_lname.content }}</span>
+                    <span class="thumb-info-type">{{ position | raw }}</span>
+                </span>
+            </a>
+        </span>
+        <span class="thumb-info-caption">
+            {% if fields.field_people_bio.content | render %}
+                <span class="thumb-info-caption-text">{{ fields.field_people_bio.content }}</span>
+            {% endif %}
+            <span class="thumb-info-social-icons">
+                {% if fields.field_facebook_link | render %}
+                    <a target="_blank" href="{{ fields.field_facebook_link | render | striptags}}"><i class="fa fa-facebook"></i><span>Facebook</span></a>
+                {% endif %}
+                {% if fields.field_twitter_link | render %}
+                    <a href="{{ fields.field_twitter_link | render | striptags}}"><i class="fa fa-twitter"></i><span>Twitter</span></a>
+                {% endif %}
+                {% if fields.field_linkedin_link | render %}
+                    <a href="{{ fields.field_linkedin_link | render | striptags}}"><i class="fa fa-linkedin"></i><span>Linkedin</span></a>
+                {% endif %}
+            </span>
+        </span>
+    </span>
+</div>

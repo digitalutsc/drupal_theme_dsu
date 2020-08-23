@@ -11,3 +11,11 @@
 .slogan{
   background-color: #ffffff;
 }
+
+.post-image-dsu {
+  margin-left: -60px !important;
+}
+ .no-border {
+   border: 0 !important;
+ }
+ .border-bottom { border-bottom: 1px solid #DDD;}
