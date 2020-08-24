@@ -22,3 +22,4 @@
    border: 0 !important;
  }
  .border-bottom { border-bottom: 1px solid #DDD;}
+ .bottom-padding { padding-bottom: 20px; }

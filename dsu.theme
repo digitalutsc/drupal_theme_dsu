@@ -21,4 +21,5 @@ function dsu_preprocess_views_view_unformatted(&$variables) {
     $tids = $query->execute();
     $terms = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadMultiple($tids);
     $variables['emerging_professional_positions'] = $terms;
+    $variables['staff_positions'] = array_merge($variables['staff_positions'], $terms);
 }
