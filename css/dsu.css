@@ -23,3 +23,10 @@
  }
  .border-bottom { border-bottom: 1px solid #DDD;}
  .bottom-padding { padding-bottom: 20px; }
+ .btn-dsu{
+     background: #002554 !important;
+     color: #ffffff !important;
+ }
+ .img-fit {
+     width:100% !important;
+ }
