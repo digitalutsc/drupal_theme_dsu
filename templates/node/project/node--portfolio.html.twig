@@ -1,72 +1,95 @@
 {% set layout_mode = content.field_layout_mode['#items'].getValue()|first.value %}
+{% set images = node.field_image %}
+{% set thumbnail =  node.field_thumbnail %}
+
 {% if layout_mode != 'left_sidebar' and layout_mode != 'right_sidebar' and layout_mode != 'left_right_sidebar' and layout_mode != 'sticky_sidebar' %}
-	<div class="container">
-		<div class="row">
-			<div class="col-md-12">
-				<div class="portfolio-title {% if layout_mode == 'extended' %} mb-xs {% endif %}">
-					<div class="row">
-						<div class="portfolio-nav-all col-md-1">
-							<a href="{{ base_url }}/research" data-tooltip data-original-title="{{ 'Back to list' | t }}">
-								<i class="fa fa-th"></i>
-							</a>
-						</div>
-						<div class="col-md-10 left">
-							<h2 class="mb-none">{{ label }}</h2>
-						</div>
-						<div class="portfolio-nav col-md-1">
-							{% if content.flippy_pager['#list']['prev'] and content.flippy_pager['#list']['prev'] != 'Null' %}
-								<a href="{{ base_url }}{{ '/node/' }}{{ content.flippy_pager['#list']['prev']['nid'] }}" class="portfolio-nav-prev" data-tooltip data-original-title="{{ 'Previous' | t }}"><i class="fa fa-chevron-left"></i></a>
-							{% endif %}
-							{% if content.flippy_pager['#list']['next'] and content.flippy_pager['#list']['next'] != 'Null' %}
-								<a href="{{ base_url }}{{ '/node/' }}{{ content.flippy_pager['#list']['next']['nid'] }}" class="portfolio-nav-next" data-tooltip data-original-title="{{ 'Next' | t }}"><i class="fa fa-chevron-right"></i></a>
-							{% endif %}
-						</div>
-					</div>
-				</div>
-				{% if layout_mode != 'medias' and layout_mode != 'fullwidth_slider' and layout_mode != 'carousel' and layout_mode != 'fullwidth_video' and layout_mode != 'extended' %}
-				<hr class="tall">
-				{% endif %}
-			</div>
-		</div>
-	</div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="portfolio-title {% if layout_mode == 'extended' %} mb-xs {% endif %}">
+                    <div class="row">
+                        <div class="portfolio-nav-all col-md-1">
+                            <a href="{{ base_url }}/research" data-tooltip
+                               data-original-title="{{ 'Back to list' | t }}">
+                                <i class="fa fa-th"></i>
+                            </a>
+                        </div>
+                        <div class="col-md-10 left">
+                            <h2 class="mb-none">{{ label }}</h2>
+                        </div>
+                        <div class="portfolio-nav col-md-1">
+                            {% if content.flippy_pager['#list']['prev'] and content.flippy_pager['#list']['prev'] != 'Null' %}
+                                <a href="{{ base_url }}{{ '/node/' }}{{ content.flippy_pager['#list']['prev']['nid'] }}"
+                                   class="portfolio-nav-prev" data-tooltip data-original-title="{{ 'Previous' | t }}"><i
+                                            class="fa fa-chevron-left"></i></a>
+                            {% endif %}
+                            {% if content.flippy_pager['#list']['next'] and content.flippy_pager['#list']['next'] != 'Null' %}
+                                <a href="{{ base_url }}{{ '/node/' }}{{ content.flippy_pager['#list']['next']['nid'] }}"
+                                   class="portfolio-nav-next" data-tooltip data-original-title="{{ 'Next' | t }}"><i
+                                            class="fa fa-chevron-right"></i></a>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                {% if layout_mode != 'medias' and layout_mode != 'fullwidth_slider' and layout_mode != 'carousel' and layout_mode != 'fullwidth_video' and layout_mode != 'extended' %}
+                    <hr class="tall">
+                {% endif %}
+            </div>
+        </div>
+    </div>
 {% endif %}
 
-{% if layout_mode == 'small_slider' %}
+{% if layout_mode == 'small_slider' or layout_mode is empty %}
 	<div class="container">
 		<div class="row">
 			<div class="col-md-4">
-				<div class="owl-carousel owl-theme" data-plugin-options='{"items": 1, "margin": 10, "animateOut": "fadeOut", "autoplay": true, "autoplayTimeout": 3000}'>
-					{% set images = node.field_image %}
-					{% for image  in images %}
+				{% if images|length > 1 %}
+					<div class="owl-carousel owl-theme" data-plugin-options='{"items": 1, "margin": 10, "animateOut": "fadeOut", "autoplay": true, "autoplayTimeout": 3000}'>
+						{% for image  in images %}
+						<div>
+							<span class="img-thumbnail">
+								<img alt="" class="img-responsive" src="{{ file_url(image.entity.fileuri) }}">
+							</span>
+						</div>
+						{% endfor %}
+					</div>
+				{% elseif images|length == 1 %}
 					<div>
-						<span class="img-thumbnail">
-							<img alt="" class="img-responsive" src="{{ file_url(image.entity.fileuri) }}">
+						<span class="img-thumbnail img-fit">
+							<img alt="" class="img-responsive img-fit" src="{{ file_url(images[0].entity.fileuri) }}">
 						</span>
 					</div>
-					{% endfor %}
-				</div>
+				{% elseif thumbnail is not empty %}
+					<div>
+						<span class="img-thumbnail img-fit">
+							<img alt="" class="img-responsive img-fit" src="{{ file_url(thumbnail.entity.fileuri) }}">
+						</span>
+					</div>
+				{% endif %}
 			</div>
 			<div class="col-md-8">
 				<div class="portfolio-info">
 					<div class="row">
 						<div class="col-md-12 center">
 							<ul>
-								<li>
+								<!--<li>
 									<i class="fa fa-calendar"></i>
 									{% set createdDate = node.getCreatedTime|date('d F Y') %}
 									{{ createdDate }}
-								</li>
+								</li>-->
+								{% if content.field_portfolio_category | render is not empty %}
 								<li>
 									<i class="fa fa-tags"></i>
-									{{ content.field_tags }}
+									{{ content.field_portfolio_category }}
 								</li>
+								{% endif %}
 							</ul>
 						</div>
 					</div>
 				</div>
 				<h5 class="mt-sm">{{ 'More Information' | t }}</h5>
 				<div class="mt-xlg">{{ content.body | render }}</div>
-				<a target ="_blank" href="{{ content.field_portfolio_link | render | striptags}}" class="btn btn-primary btn-icon"><i class="fa fa-external-link"></i>{{ 'Project Link' | t }}</a> <span class="arrow hlb appear-animation" data-appear-animation="rotateInUpLeft" data-appear-animation-delay="800"></span>
+				<a target ="_blank" href="{{ content.field_portfolio_link | render | striptags}}" class="btn btn-primary btn-icon btn-dsu"><i class="fa fa-external-link"></i>{{ 'Project Link' | t }}</a> <!--<span class="arrow hlb appear-animation" data-appear-animation="rotateInUpLeft" data-appear-animation-delay="800"></span>-->
 				<ul class="portfolio-details">
 					{% if content.field_portfolio_skills | render %}
 					<li>
@@ -107,15 +130,17 @@
 					<div class="row">
 						<div class="col-md-12 center">
 							<ul>
-								<li>
+								<!--<li>
 									<i class="fa fa-calendar"></i>
 									{% set createdDate = node.getCreatedTime|date('d F Y') %}
 									{{ createdDate }}
-								</li>
+								</li>-->
+								{% if content.field_portfolio_category | render is not empty %}
 								<li>
 									<i class="fa fa-tags"></i>
-									{{ content.field_tags }}
+									{{ content.field_portfolio_category }}
 								</li>
+								{% endif %}
 							</ul>
 						</div>
 					</div>
@@ -126,7 +151,7 @@
 			<div class="{{ (content.field_portfolio_client | render) ? 'col-md-7' : 'col-md-12'  }}">
 				<h5 class="mt-lg mb-sm">{{ 'More Information' | t }}</h5>
 				<div class="mt-none mb-xlg">{{ content.body | render }}</div>
-				<a target ="_blank" href="{{ content.field_portfolio_link | render | striptags}}" class="btn btn-primary btn-icon"><i class="fa fa-external-link"></i>{{ 'Project Link' | t }}</a> <span class="arrow hlb appear-animation" data-appear-animation="rotateInUpLeft" data-appear-animation-delay="800"></span>
+				<a target ="_blank" href="{{ content.field_portfolio_link | render | striptags}}" class="btn btn-primary btn-icon btn-dsu"><i class="fa fa-external-link"></i>{{ 'Project Link' | t }}</a> <!--<span class="arrow hlb appear-animation" data-appear-animation="rotateInUpLeft" data-appear-animation-delay="800"></span>-->
 				<ul class="portfolio-details">
 
 					{% if content.field_portfolio_skills | render %}
@@ -170,15 +195,17 @@
 					<div class="row">
 						<div class="col-md-12 center">
 							<ul>
-								<li>
+								<!--<li>
 									<i class="fa fa-calendar"></i>
 									{% set createdDate = node.getCreatedTime|date('d F Y') %}
 									{{ createdDate }}
-								</li>
+								</li>-->
+								{% if content.field_portfolio_category | render is not empty %}
 								<li>
 									<i class="fa fa-tags"></i>
-									{{ content.field_tags }}
+									{{ content.field_portfolio_category }}
 								</li>
+								{% endif %}
 							</ul>
 						</div>
 					</div>
@@ -190,7 +217,7 @@
 				<h5 class="mt-lg mb-sm">{{ 'More Information' | t }}</h5>
 				<div class="mt-none mb-xlg">{{ content.body | render }}</div>
 				{% if content.field_portfolio_skills | render %}
-				<a target ="_blank" href="{{ content.field_portfolio_link | render | striptags}}" class="btn btn-primary btn-icon"><i class="fa fa-external-link"></i>{{ 'Project Link' | t }}</a> <span class="arrow hlb appear-animation" data-appear-animation="rotateInUpLeft" data-appear-animation-delay="800"></span>
+				<a target ="_blank" href="{{ content.field_portfolio_link | render | striptags}}" class="btn btn-primary btn-icon btn-dsu"><i class="fa fa-external-link"></i>{{ 'Project Link' | t }}</a> <!--<span class="arrow hlb appear-animation" data-appear-animation="rotateInUpLeft" data-appear-animation-delay="800"></span>-->
 				<ul class="portfolio-details">
 					<li>
 						<h5 class="mt-sm mb-xs">{{ 'Skills' | t }}</h5>
@@ -242,15 +269,17 @@
 					<div class="row">
 						<div class="col-md-12 center">
 							<ul>
-								<li>
+								<!--<li>
 									<i class="fa fa-calendar"></i>
 									{% set createdDate = node.getCreatedTime|date('d F Y') %}
 									{{ createdDate }}
-								</li>
+								</li>-->
+								{% if content.field_portfolio_category | render is not empty %}
 								<li>
 									<i class="fa fa-tags"></i>
-									{{ content.field_tags }}
+									{{ content.field_portfolio_category }}
 								</li>
+								{% endif %}
 							</ul>
 						</div>
 					</div>
@@ -261,7 +290,7 @@
 			<div class="{{ (content.field_portfolio_client | render) ? 'col-md-7' : 'col-md-12'  }}">
 				<h5 class="mt-lg mb-sm">{{ 'More Information' | t }}</h5>
 				<div class="mt-none mb-xlg">{{ content.body | render }}</div>
-				<a target ="_blank" href="{{ content.field_portfolio_link | render | striptags}}" class="btn btn-primary btn-icon"><i class="fa fa-external-link"></i>{{ 'Project Link' | t }}</a> <span class="arrow hlb appear-animation" data-appear-animation="rotateInUpLeft" data-appear-animation-delay="800"></span>
+				<a target ="_blank" href="{{ content.field_portfolio_link | render | striptags}}" class="btn btn-primary btn-icon btn-dsu"><i class="fa fa-external-link"></i>{{ 'Project Link' | t }}</a> <!--<span class="arrow hlb appear-animation" data-appear-animation="rotateInUpLeft" data-appear-animation-delay="800"></span>-->
 				<ul class="portfolio-details">
 					{% if content.field_portfolio_skills | render %}
 					<li>
@@ -309,15 +338,17 @@
 					<div class="row">
 						<div class="col-md-12 center">
 							<ul>
-								<li>
+								<!--<li>
 									<i class="fa fa-calendar"></i>
 									{% set createdDate = node.getCreatedTime|date('d F Y') %}
 									{{ createdDate }}
-								</li>
+								</li>-->
+								{% if content.field_portfolio_category | render is not empty %}
 								<li>
 									<i class="fa fa-tags"></i>
-									{{ content.field_tags }}
+									{{ content.field_portfolio_category }}
 								</li>
+								{% endif %}
 							</ul>
 						</div>
 					</div>
@@ -328,7 +359,7 @@
 			<div class="{{ (content.field_portfolio_client | render) ? 'col-md-9' : 'col-md-12'  }}">
 				<h5 class="mt-lg mb-sm">{{ 'More Information' | t }}</h5>
 				<div class="mt-none mb-xlg">{{ content.body | render }}</div>
-				<a target ="_blank" href="{{ content.field_portfolio_link | render | striptags}}" class="btn btn-primary btn-icon"><i class="fa fa-external-link"></i>{{ 'Project Link' | t }}</a> <span class="arrow hlb appear-animation" data-appear-animation="rotateInUpLeft" data-appear-animation-delay="800"></span>
+				<a target ="_blank" href="{{ content.field_portfolio_link | render | striptags}}" class="btn btn-primary btn-icon btn-dsu"><i class="fa fa-external-link"></i>{{ 'Project Link' | t }}</a> <!--<span class="arrow hlb appear-animation" data-appear-animation="rotateInUpLeft" data-appear-animation-delay="800"></span>-->
 				{% if content.field_portfolio_client | render %}
 				<ul class="portfolio-details">
 					<li>
@@ -403,15 +434,17 @@
 					<div class="row">
 						<div class="col-md-12 center">
 							<ul>
-								<li>
+								<!--<li>
 									<i class="fa fa-calendar"></i>
 									{% set createdDate = node.getCreatedTime|date('d F Y') %}
 									{{ createdDate }}
-								</li>
+								</li>-->
+								{% if content.field_portfolio_category | render is not empty %}
 								<li>
 									<i class="fa fa-tags"></i>
-									{{ content.field_tags }}
+									{{ content.field_portfolio_category }}
 								</li>
+								{% endif %}
 							</ul>
 						</div>
 					</div>
@@ -422,7 +455,7 @@
 			<div class="col-md-9">
 				<h5 class="mt-lg mb-sm">{{ 'More Information' | t }}</h5>
 				<div class="mt-none mb-xlg">{{ content.body | render }}</div>
-				<a target ="_blank" href="{{ content.field_portfolio_link | render | striptags}}" class="btn btn-primary btn-icon"><i class="fa fa-external-link"></i>{{ 'Project Link' | t }}</a> <span class="arrow hlb appear-animation" data-appear-animation="rotateInUpLeft" data-appear-animation-delay="800"></span>
+				<a target ="_blank" href="{{ content.field_portfolio_link | render | striptags}}" class="btn btn-primary btn-icon btn-dsu"><i class="fa fa-external-link"></i>{{ 'Project Link' | t }}</a> <!--<span class="arrow hlb appear-animation" data-appear-animation="rotateInUpLeft" data-appear-animation-delay="800"></span>-->
 				{% if content.field_portfolio_client | render %}
 				<ul class="portfolio-details">
 					<li>
@@ -493,14 +526,14 @@
 					<div class="row">
 						<div class="col-md-12 center">
 							<ul>
-								<li>
+								<!--<li>
 									<i class="fa fa-calendar"></i>
 									{% set createdDate = node.getCreatedTime|date('d F Y') %}
 									{{ createdDate }}
-								</li>
+								</li>-->
 								<li>
 									<i class="fa fa-tags"></i>
-									{{ content.field_tags }}
+									{{ content.field_portfolio_category }}
 								</li>
 							</ul>
 						</div>
@@ -512,7 +545,7 @@
 			<div class="col-md-9">
 				<h5 class="mt-lg mb-sm">{{ 'More Information' | t }}</h5>
 				<div class="mt-none mb-xlg">{{ content.body | render }}</div>
-				<a target ="_blank" href="{{ content.field_portfolio_link | render | striptags}}" class="btn btn-primary btn-icon"><i class="fa fa-external-link"></i>{{ 'Project Link' | t }}</a> <span class="arrow hlb appear-animation" data-appear-animation="rotateInUpLeft" data-appear-animation-delay="800"></span>
+				<a target ="_blank" href="{{ content.field_portfolio_link | render | striptags}}" class="btn btn-primary btn-icon btn-dsu"><i class="fa fa-external-link"></i>{{ 'Project Link' | t }}</a> <!--<span class="arrow hlb appear-animation" data-appear-animation="rotateInUpLeft" data-appear-animation-delay="800"></span>-->
 				<ul class="portfolio-details">
 					{% if content.field_portfolio_client | render %}
 					<li>
@@ -589,15 +622,17 @@
 							{% set createdDate = node.getCreatedTime|date('d F Y') %}
 							{{ createdDate }}
 						</li>
+						{% if content.field_portfolio_category | render is not empty %}
 						<li>
 							<i class="fa fa-tags"></i>
-							{{ content.field_tags }}
+							{{ content.field_portfolio_category }}
 						</li>
+						{% endif %}
 					</ul>
 				</div>
 				<h5 class="mt-lg mb-sm">{{ 'More Information' | t }}</h5>
 				<div class="mt-none mb-xlg">{{ content.body | render }}</div>
-				<a target ="_blank" href="{{ content.field_portfolio_link | render | striptags}}" class="btn btn-primary btn-icon"><i class="fa fa-external-link"></i>{{ 'Project Link' | t }}</a> <span class="arrow hlb appear-animation" data-appear-animation="rotateInUpLeft" data-appear-animation-delay="800"></span>
+				<a target ="_blank" href="{{ content.field_portfolio_link | render | striptags}}" class="btn btn-primary btn-icon btn-dsu"><i class="fa fa-external-link"></i>{{ 'Project Link' | t }}</a> <!--<span class="arrow hlb appear-animation" data-appear-animation="rotateInUpLeft" data-appear-animation-delay="800"></span>-->
 				<ul class="portfolio-details">
 					{% if content.field_portfolio_client | render %}
 					<li>
@@ -623,20 +658,22 @@
 			<div class="col-md-7">
 				<div class="portfolio-info pull-none">
 					<ul>
-						<li>
-							<i class="fa fa-calendar"></i>
-							{% set createdDate = node.getCreatedTime|date('d F Y') %}
-							{{ createdDate }}
-						</li>
+						<!--<li>
+									<i class="fa fa-calendar"></i>
+									{% set createdDate = node.getCreatedTime|date('d F Y') %}
+									{{ createdDate }}
+								</li>-->
+						{% if content.field_portfolio_category | render is not empty %}
 						<li>
 							<i class="fa fa-tags"></i>
-							{{ content.field_tags }}
+							{{ content.field_portfolio_category }}
 						</li>
+						{% endif %}
 					</ul>
 				</div>
 				<h5 class="mt-lg mb-sm">{{ 'More Information' | t }}</h5>
 				<div class="mt-none mb-xlg">{{ content.body | render }}</div>
-				<a target ="_blank" href="{{ content.field_portfolio_link | render | striptags}}" class="btn btn-primary btn-icon"><i class="fa fa-external-link"></i>{{ 'Project Link' | t }}</a> <span class="arrow hlb appear-animation" data-appear-animation="rotateInUpLeft" data-appear-animation-delay="800"></span>
+				<a target ="_blank" href="{{ content.field_portfolio_link | render | striptags}}" class="btn btn-primary btn-icon btn-dsu"><i class="fa fa-external-link"></i>{{ 'Project Link' | t }}</a> <!--<span class="arrow hlb appear-animation" data-appear-animation="rotateInUpLeft" data-appear-animation-delay="800"></span>-->
 				<ul class="portfolio-details">
 					{% if content.field_portfolio_client | render %}
 					<li>
@@ -679,59 +716,6 @@
 			</div>
 		</div>
 	</div>
-{% elseif layout_mode == 'left_sidebar' or layout_mode == 'right_sidebar' or layout_mode == 'left_right_sidebar' %}
-	<div class="container">
-		<div class="row">
-		{% if layout_mode == 'left_sidebar' or  layout_mode == 'left_right_sidebar' %}
-			<div class="col-md-3">
-				<aside class="sidebar left_portfolio_sidebar">
-					{{ left_sidebar }}
-				</aside>
-			</div>
-		{% endif %}
-		{% if layout_mode == 'left_right_sidebar' %}
-			<div class="col-md-6">
-		{% else %}
-			<div class="col-md-9">
-		{% endif %}
-				<div class="row">
-					<div class="lightbox" data-plugin-options='{"delegate": "a.lightbox-portfolio", "type": "image", "gallery": {"enabled": true}}'>
-						<ul class="portfolio-list">
-							{% set images = node.field_image %}
-							{% for image  in images %}
-								<li class="col-md-12">
-									<div class="portfolio-item">
-										<span class="thumb-info thumb-info-centered-icons thumb-info-no-borders">
-											<span class="thumb-info-wrapper">
-												<img src="{{ file_url(image.entity.fileuri) }}" class="img-responsive" alt="">
-												<a href="{{ file_url(image.entity.fileuri) }}" class="lightbox-portfolio">
-													<span class="thumb-info-action">
-														<span class="thumb-info-action-icon thumb-info-action-icon-light"><i class="fa fa-search-plus"></i></span>
-													</span>
-												</a>
-											</span>
-										</span>
-									</div>
-								</li>
-							{% endfor %}
-						</ul>
-					</div>
-				</div>
-			</div>
-		{% if layout_mode == 'right_sidebar' or  layout_mode == 'left_right_sidebar' %}
-			{% if layout_mode == 'right_sidebar' %}
-				{% set class_sidebar = 'right_portfolio_sidebar' %}
-			{% else %}
-				{% set class_sidebar = '' %}
-			{% endif %}
-			<div class="col-md-3">
-				<aside class="sidebar {{ class_sidebar }}">
-					{{ right_sidebar }}
-				</aside>
-			</div>
-		{% endif %}
-		</div>
-	</div>
 {% elseif layout_mode == 'sticky_sidebar' %}
 	<div class="container">
 		<div class="row">
@@ -764,20 +748,22 @@
 				<aside class="sidebar" id="sidebar" data-plugin-sticky data-plugin-options='{"minWidth": 991, "containerSelector": ".container", "padding": {"top": 110}}'>
 					<div class="portfolio-info pull-none">
 						<ul>
-							<li>
-								<i class="fa fa-calendar"></i>
-								{% set createdDate = node.getCreatedTime|date('d F Y') %}
-								{{ createdDate }}
-							</li>
-							<li>
-								<i class="fa fa-tags"></i>
-								{{ content.field_tags }}
-							</li>
+							<!--<li>
+									<i class="fa fa-calendar"></i>
+									{% set createdDate = node.getCreatedTime|date('d F Y') %}
+									{{ createdDate }}
+								</li>-->
+							{% if content.field_portfolio_category | render is not empty %}
+								<li>
+									<i class="fa fa-tags"></i>
+									{{ content.field_portfolio_category }}
+								</li>
+								{% endif %}
 						</ul>
 					</div>
 					<h5 class="mt-xl">{{ 'More Information' | t }}</h5>
 					<div class="mt-xlg">{{ content.body }}</div>
-					<a target ="_blank" href="{{ content.field_portfolio_link | render | striptags}}" class="btn btn-primary btn-icon"><i class="fa fa-external-link"></i>{{ 'Project Link' | t }}</a> <span class="arrow hlb appear-animation" data-appear-animation="rotateInUpLeft" data-appear-animation-delay="800"></span>
+					<a target ="_blank" href="{{ content.field_portfolio_link | render | striptags}}" class="btn btn-primary btn-icon btn-dsu"><i class="fa fa-external-link"></i>{{ 'Project Link' | t }}</a> <!--<span class="arrow hlb appear-animation" data-appear-animation="rotateInUpLeft" data-appear-animation-delay="800"></span>-->
 					<ul class="portfolio-details">
 					{% if content.field_portfolio_client | render %}
 						<li>
@@ -790,34 +776,65 @@
 			</div>
 		</div>
 	</div>
-{% elseif layout_mode == 'extended' %}
-	{{ content.field_portfolio_extended }}
+{% elseif layout_mode == 'sticky_sidebar_right' %}
 	<div class="container">
 		<div class="row">
-			<div class="col-md-7">
-				<h5 class="mt-lg mb-sm">{{ 'More Information' | t }}</h5>
-				<div class="mt-none mb-xlg">{{ content.body | render }}</div>
-				<a href="#" class="btn btn-primary btn-icon"><i class="fa fa-external-link"></i>{{ 'Project Link' | t }}</a> <span class="arrow hlb appear-animation" data-appear-animation="rotateInUpLeft" data-appear-animation-delay="800"></span>
-				<ul class="portfolio-details">
-					{% if content.field_portfolio_client | render %}
-					<li>
-						<h5 class="mt-sm mb-xs">{{ 'Skills' | t }}</h5>
-						{{ content.field_portfolio_skills }}
-					</li>
-					{% endif %}
-				</ul>
-			</div>
 			<div class="col-md-5">
-				<ul class="portfolio-details mt-none mb-xl">
-					{% if content.field_portfolio_client | render %}
-					<li>
-						<h5 class="mt-lg mb-sm">{{ 'Client' | t }}</h5>
-						<p>{{ content.field_portfolio_client | render | striptags}} - <a href="{{ content.field_portfolio_client_link | render | striptags}}" target="_blank"><i class="fa fa-external-link"></i> {{ content.field_portfolio_client_link | render | striptags}}</a></p>
-					</li>
-					{% endif %}
-				</ul>
-				{{ content.field_portfolio_testimonial }}
+				<aside class="sidebar" id="sidebar" data-plugin-sticky data-plugin-options='{"minWidth": 991, "containerSelector": ".container", "padding": {"top": 110}}'>
+					<div class="portfolio-info pull-none">
+						<ul>
+							<!--<li>
+									<i class="fa fa-calendar"></i>
+									{% set createdDate = node.getCreatedTime|date('d F Y') %}
+									{{ createdDate }}
+								</li>-->
+							{% if content.field_portfolio_category | render is not empty %}
+								<li>
+									<i class="fa fa-tags"></i>
+									{{ content.field_portfolio_category }}
+								</li>
+							{% endif %}
+						</ul>
+					</div>
+					<h5 class="mt-xl">{{ 'More Information' | t }}</h5>
+					<div class="mt-xlg">{{ content.body }}</div>
+					<a target ="_blank" href="{{ content.field_portfolio_link | render | striptags}}" class="btn btn-primary btn-icon btn-dsu"><i class="fa fa-external-link"></i>{{ 'Project Link' | t }}</a> <!--<span class="arrow hlb appear-animation" data-appear-animation="rotateInUpLeft" data-appear-animation-delay="800"></span>-->
+					<ul class="portfolio-details">
+						{% if content.field_portfolio_client | render %}
+							<li>
+								<h5 class="mt-sm mb-xs">{{ 'Skills' | t }}</h5>
+								{{ content.field_portfolio_skills }}
+							</li>
+						{% endif %}
+					</ul>
+				</aside>
 			</div>
+			<div class="col-md-7">
+				<div class="row">
+					<div class="lightbox" data-plugin-options='{"delegate": "a.lightbox-portfolio", "type": "image", "gallery": {"enabled": true}}'>
+						<ul class="portfolio-list">
+							{% set images = node.field_image %}
+							{% for image  in images %}
+								<li class="col-md-12">
+									<div class="portfolio-item">
+									<span class="thumb-info thumb-info-centered-icons thumb-info-no-borders">
+										<span class="thumb-info-wrapper">
+											<img src="{{ file_url(image.entity.fileuri) }}" class="img-responsive" alt="">
+											<a href="{{ file_url(image.entity.fileuri) }}" class="lightbox-portfolio">
+												<span class="thumb-info-action">
+													<span class="thumb-info-action-icon thumb-info-action-icon-light"><i class="fa fa-search-plus"></i></span>
+												</span>
+											</a>
+										</span>
+									</span>
+									</div>
+								</li>
+							{% endfor %}
+						</ul>
+					</div>
+				</div>
+			</div>
+
 		</div>
 	</div>
 {% endif %}
