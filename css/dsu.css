@@ -20,6 +20,10 @@
  .no-border {
    border: 0 !important;
  }
+.h4-staff-name {
+    margin-bottom: 5px !important;
+    text-align: center;
+}
  .border-bottom { border-bottom: 1px solid #DDD;}
  .bottom-padding { padding-bottom: 20px; }
  .btn-dsu{
@@ -37,3 +41,5 @@
      padding-left: 0 !important;
     float: none !important;
  }
+.thumb-info-caption strong { font-size: 1.2em; }
+.thumb-info-caption strong { padding: 5px !important;}

@@ -5,32 +5,17 @@
 <div class="col-md-3 col-sm-6 col-xs-12 isotope-item {{ position_category | replace({' ': '-'}) }} bottom-padding">
     <span class="thumb-info thumb-info-hide-wrapper-bg">
         <span class="thumb-info-wrapper">
-            <img src="{{ file_url(avatar.entity.fileuri) }}" alt="" class="img-responsive">
-
-            <span class="thumb-info-title">
-            <span class="thumb-info-inner">{{ fields.title.content }}</span>
-            <span class="thumb-info-type">{{ position_title | raw }}</span>
+            <a href="/node/{{ row._entity.id }}"><img src="{{ file_url(avatar.entity.fileuri) }}" alt="" class="img-responsive"></a>
         </span>
-
-        </span>
-        {% if fields.field_people_bio.content | render %}
             <span class="thumb-info-caption">
-                    <span class="thumb-info-caption-text">{{ fields.body.content }}</span>
-                <span class="thumb-info-social-icons">
-                    {% if fields.field_facebook_link | render %}
-                        <a target="_blank" href="{{ fields.field_facebook_link | render | striptags }}"><i
-                                    class="fa fa-facebook"></i><span>Facebook</span></a>
-                    {% endif %}
-                    {% if fields.field_twitter_link | render %}
-                        <a href="{{ fields.field_twitter_link | render | striptags }}"><i
-                                    class="fa fa-twitter"></i><span>Twitter</span></a>
-                    {% endif %}
-                    {% if fields.field_linkedin_link | render %}
-                        <a href="{{ fields.field_linkedin_link | render | striptags }}"><i
-                                    class="fa fa-linkedin"></i><span>Linkedin</span></a>
-                    {% endif %}
-                </span>
+                    <span class="thumb-info-caption-text text-center">
+                        <h4 class="h4-staff-name">{{ fields.title.content }}</h4>
+                        {% if fields.body.content | render %}
+                            {{ fields.body.content }}
+                        {% endif %}
+                    </span>
+
             </span>
-        {% endif %}
+
     </span>
 </div>

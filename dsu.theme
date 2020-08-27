@@ -16,10 +16,8 @@ function dsu_preprocess_views_view_unformatted(&$variables) {
     $terms = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadMultiple($tids);
     $variables['staff_positions'] = $terms;
 
-    $query = \Drupal::entityQuery('taxonomy_term');
-    $query->condition('vid', "emerging_professional_positions");
-    $tids = $query->execute();
-    $terms = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadMultiple($tids);
-    $variables['emerging_professional_positions'] = $terms;
-    $variables['staff_positions'] = array_merge($variables['staff_positions'], $terms);
+    if (\Drupal::currentUser()->isAuthenticated()) {
+        // This user is logged in.
+        $variables['is_user_login'] = true;
+    }
 }
