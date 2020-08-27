@@ -10,15 +10,30 @@
         {% if images|length %}
             <div class="col-md-3">
                 <div class="post-image">
-                    <div class="owl-carousel owl-theme" data-plugin-options='{"items":1}'>
-                        {% for image  in images %}
-                            <div>
-                                <div class="img-thumbnail img-fit">
-                                    <img class="img-responsive img-fit" src="{{ file_url(image.entity.fileuri) }}" alt="">
+                    {% if images|length > 1 %}
+                        <div class="owl-carousel owl-theme" data-plugin-options='{"items": 1, "margin": 10, "animateOut": "fadeOut", "autoplay": true, "autoplayTimeout": 3000}'>
+                            {% for image  in images %}
+                                <div>
+							<span class="img-thumbnail img-fit">
+								<img alt="" class="img-responsive img-fit" src="{{ file_url(image.entity.fileuri) }}">
+							</span>
                                 </div>
-                            </div>
-                        {% endfor %}
-                    </div>
+                            {% endfor %}
+                        </div>
+                    {% elseif images|length == 1 %}
+                        <div>
+						<span class="img-thumbnail img-fit">
+							<img alt="" class="img-responsive img-fit" src="{{ file_url(images[0].entity.fileuri) }}">
+						</span>
+                        </div>
+                    {% elseif thumbnail is not empty %}
+                        <div>
+						<span class="img-thumbnail img-fit">
+							<img alt="" class="img-responsive img-fit" src="{{ file_url(thumbnail.entity.fileuri) }}">
+						</span>
+                        </div>
+                    {% endif %}
+
                 </div>
             </div>
         {% endif %}

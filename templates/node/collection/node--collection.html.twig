@@ -11,8 +11,8 @@
 					<div class="owl-carousel owl-theme" data-plugin-options='{"items": 1, "margin": 10, "animateOut": "fadeOut", "autoplay": true, "autoplayTimeout": 3000}'>
 						{% for image  in images %}
 						<div>
-							<span class="img-thumbnail">
-								<img alt="" class="img-responsive" src="{{ file_url(image.entity.fileuri) }}">
+							<span class="img-thumbnail img-fit">
+								<img alt="" class="img-responsive img-fit" src="{{ file_url(image.entity.fileuri) }}">
 							</span>
 						</div>
 						{% endfor %}
