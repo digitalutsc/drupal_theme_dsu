@@ -13,8 +13,8 @@
                     <div class="owl-carousel owl-theme" data-plugin-options='{"items":1}'>
                         {% for image  in images %}
                             <div>
-                                <div class="img-thumbnail">
-                                    <img class="img-responsive" src="{{ file_url(image.entity.fileuri) }}" alt="">
+                                <div class="img-thumbnail img-fit">
+                                    <img class="img-responsive img-fit" src="{{ file_url(image.entity.fileuri) }}" alt="">
                                 </div>
                             </div>
                         {% endfor %}

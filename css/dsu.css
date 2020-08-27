@@ -30,3 +30,11 @@
  .img-fit {
      width:100% !important;
  }
+.pager .pager__items {
+     display: block !important;
+     margin-left: auto !important;
+     margin-right: auto !important;
+     width: 40% !important;
+     padding-left: 0 !important;
+    float: none !important;
+ }

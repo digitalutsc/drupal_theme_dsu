@@ -32,9 +32,11 @@
                             <li>
                                 <i class="fa fa-calendar"></i> {{ fields.created.content }}
                             </li>
-                            <li>
-                                <i class="fa fa-tags"></i> {{ fields.field_portfolio_category_1.content }}</a>
-                            </li>
+                            {% if fields.field_portfolio_category_1.content is not empty %}
+                                <li>
+                                    <i class="fa fa-tags"></i> {{ fields.field_portfolio_category_1.content }}</a>
+                                </li>
+                            {% endif %}
                         </ul>
                     </div>
                 </div>
@@ -45,8 +47,8 @@
 
             <a href="{{ fields.path.content }}" class="btn btn-primary">Learn More</a>
 
-            {% if skills|length %}
-                <ul class="portfolio-details">
+            {% if skills|length > 0 %}
+               <!-- <ul class="portfolio-details">
                     <li>
                         <p><strong>Skills:</strong></p>
 
@@ -56,7 +58,7 @@
                                 {% endfor %}
                         </ul>
                     </li>
-                </ul>
+                </ul>-->
             {% endif %}
 
         </div>

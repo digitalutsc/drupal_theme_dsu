@@ -16,7 +16,9 @@
 
                 <span class="thumb-info-title">
                     <span class="thumb-info-inner">{{ fields.title.content }}</span>
-                    <span class="thumb-info-type">{{ fields.field_portfolio_category_1.content }}</span>
+                     {% if fields.field_portfolio_category_1.content is not empty %}
+                         <span class="thumb-info-type">{{ fields.field_portfolio_category_1.content }} {{ (fields.field_portfolio_size_1.content is not empty) ?  ' - ' ~ fields.field_portfolio_size_1.content  :  '' }}</span>
+                     {% endif %}
                 </span>
                 <span class="thumb-info-action">
                     <span class="thumb-info-action-icon"><i class="fa fa-link"></i></span>
