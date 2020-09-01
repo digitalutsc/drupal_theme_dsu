@@ -7,11 +7,11 @@ $theme_root = $base_url.'/'.drupal_get_path('theme','dsu');
 function dsu_preprocess_menu(&$variables) {
 
 }
-
-
 function dsu_preprocess_views_view_unformatted(&$variables) {
     $query = \Drupal::entityQuery('taxonomy_term');
-    $query->condition('vid', "position");
+    $query->condition('vid', "position")
+            ->sort('weight', 'ASC')
+            ->sort('name', 'ASC');
     $tids = $query->execute();
     $terms = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadMultiple($tids);
     $variables['staff_positions'] = $terms;

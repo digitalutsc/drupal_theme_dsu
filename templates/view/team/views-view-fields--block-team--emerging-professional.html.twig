@@ -1,0 +1,21 @@
+{% set avatar = row._entity.field_thumbnail %}
+{% set position_category = fields.field_team_job.content %}
+{% set position_title = fields.field_job_title.content %}
+
+<div class="col-md-3 col-sm-6 col-xs-12 isotope-item {{ position_category | replace({' ': '-'}) }} bottom-padding">
+    <span class="thumb-info thumb-info-hide-wrapper-bg">
+        <span class="thumb-info-wrapper">
+            <a href="/node/{{ row._entity.id }}"><img src="{{ file_url(avatar.entity.fileuri) }}" alt="" class="img-responsive"></a>
+        </span>
+            <span class="thumb-info-caption">
+                    <span class="thumb-info-caption-text text-center">
+                        <h4 class="h4-staff-name">{{ fields.title.content }}</h4>
+                        {% if fields.body.content | render %}
+                            {{ fields.body.content }}
+                        {% endif %}
+                    </span>
+
+            </span>
+
+    </span>
+</div>

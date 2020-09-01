@@ -43,3 +43,12 @@
  }
 .thumb-info-caption strong { font-size: 1.2em; }
 .thumb-info-caption strong { padding: 5px !important;}
+
+.thumb-info-caption .thumb-info-caption-text { padding-bottom: 0px !important; }
+
+.view-display-id-github_repos {
+    margin-top: 50px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    border: 1px solid #777777 !important;
+}

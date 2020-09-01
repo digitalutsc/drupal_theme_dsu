@@ -4,7 +4,7 @@
 
 <li class="col-md-12 isotope-item mt-xl {% for categoryId in categoryIds %}{{ 'category' }}{{ categoryId|trim }} {% endfor %}">
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-3">
             <div class="portfolio-item">
                 <a href="{{ fields.path.content }}">
                     <span class="thumb-info thumb-info-no-zoom thumb-info-lighten">
@@ -24,14 +24,14 @@
                 </a>
             </div>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-9">
             <div class="portfolio-info">
                 <div class="row">
                     <div class="col-md-12 center">
                         <ul>
-                            <li>
+                           <!-- <li>
                                 <i class="fa fa-calendar"></i> {{ fields.created.content }}
-                            </li>
+                            </li>-->
                             {% if fields.field_portfolio_category_1.content is not empty %}
                                 <li>
                                     <i class="fa fa-tags"></i> {{ fields.field_portfolio_category_1.content }}</a>
@@ -42,10 +42,9 @@
                 </div>
             </div>
 
-            <h4 class="heading-primary">{{ fields.title.content }}</h4>
+            <h4 class="heading-primary"><a href="{{ fields.path.content }}">{{ fields.title.content }}</a></h4>
             <p class="mt-xlg">{{ fields.body.content }}</p>
-
-            <a href="{{ fields.path.content }}" class="btn btn-primary">Learn More</a>
+            <a target="_blank" href="{{ fields.field_portfolio_link.content }}" class="btn btn-primary">Visit the collection</a>
 
             {% if skills|length > 0 %}
                <!-- <ul class="portfolio-details">
