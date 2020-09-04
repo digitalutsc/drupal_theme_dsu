@@ -1,9 +1,9 @@
 {% set thumbnail = row._entity.field_thumbnail %}
 {% set title = fields.name.content %}
 
-<div class="col-sm-6 text-center">
+<div class="col-sm-12 text-center">
     <div class="img-thumbnail">
-        <a target="_blank" href="{{ row._entity.field_repository_link.uri }}"><img style="width: 50px" class="img-responsive" src="{{ file_url(thumbnail.entity.fileuri) }}" alt=""></a>
+        <a target="_blank" href="{{ row._entity.field_repository_link.uri }}"><img style="width: 80px" class="img-responsive" src="{{ file_url(thumbnail.entity.fileuri) }}" alt=""></a>
     </div>
     <h6><a target="_blank" href="{{ row._entity.field_repository_link.uri }}">{{ title }}</a></h6>
 </div>

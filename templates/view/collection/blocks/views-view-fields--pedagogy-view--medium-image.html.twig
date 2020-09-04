@@ -1,0 +1,63 @@
+{% set thumbnail = row._entity.field_thumbnail %}
+{% set images = row._entity.field_image %}
+{% set tagsContent = fields.field_tags.content|raw %}
+{% set title = fields.title.content %}
+{% set summary = fields.body.content %}
+{% set link = fields.field_text_link.content %}
+
+<article class="post post-medium">
+    <div class="row">
+        {% if images|length %}
+            <div class="col-md-3">
+                <div class="post-image">
+                    {% if images|length > 1 %}
+                        <div class="owl-carousel owl-theme" data-plugin-options='{"items": 1, "margin": 10, "animateOut": "fadeOut", "autoplay": true, "autoplayTimeout": 3000}'>
+                            {% for image  in images %}
+                                <div>
+							<span class="img-thumbnail img-fit">
+								<img alt="" class="img-responsive img-fit" src="{{ file_url(image.entity.fileuri) }}">
+							</span>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    {% elseif images|length == 1 %}
+                        <div>
+						<span class="img-thumbnail img-fit">
+							<img alt="" class="img-responsive img-fit" src="{{ file_url(images[0].entity.fileuri) }}">
+						</span>
+                        </div>
+                    {% elseif thumbnail is not empty %}
+                        <div>
+						<span class="img-thumbnail img-fit">
+							<img alt="" class="img-responsive img-fit" src="{{ file_url(thumbnail.entity.fileuri) }}">
+						</span>
+                        </div>
+                    {% endif %}
+
+                </div>
+            </div>
+        {% endif %}
+        <div class=" {{ (images|length > 0) ? 'col-md-9' : 'col-md-12'  }}">
+            <div class="post-content">
+                <h2><a href="{{ fields.path.content }}">{{ title }}</a></h2>
+                <p>{{ summary }}</p>
+                {% if link is not empty %}
+                    <p><a target="_blank" href="{{ link|render }}" class="btn btn-link">Visit the collection</a></p>
+                {% endif %}
+
+            </div>
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="post-meta">
+                {% if tags|length %}
+                    <span><i class="fa fa-tag"></i> {{ tagsContent }} </span>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+
+</article>
