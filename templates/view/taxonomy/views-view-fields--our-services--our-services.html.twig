@@ -1,0 +1,34 @@
+{% set icon = row._entity.field_icon.0.value %}
+{% set title = fields.name.content %}
+{% set description = row._entity.description.0.value %}
+{% set weight = row._entity.weight.0.value %}
+
+
+
+{% if weight is even or weight == 0 %}
+    {% set animation = "fadeInLeft" %}
+    {% set textalign = "reverse" %}
+{% else %}
+    {% set animation = "fadeInRight" %}
+    {% set textalign = "" %}
+{% endif %}
+
+
+{% if weight == 0 %}
+<div class="row pt-xl clearfix">
+{% elseif weight is even %}
+<div class="row">
+{% endif %}
+    <div class="col-md-6">
+        <div class="feature-box feature-box-style-2 {{ textalign }} {{ animation }} appear-animation"
+             data-appear-animation="{{ animation }}" data-appear-animation-delay="0">
+            <div class="feature-box-icon">{{ icon | raw }}</div>
+            <div class="feature-box-info">
+                <h4 class="mb-sm">{{ title }}</h4>
+                <p class="mb-lg">{{ description | raw }}</p>
+            </div>
+        </div>
+    </div>
+{% if weight is odd %}
+</div>
+{% endif %}
