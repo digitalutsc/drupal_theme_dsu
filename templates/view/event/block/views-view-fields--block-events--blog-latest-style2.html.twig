@@ -1,12 +1,16 @@
+{% set dates = fields.field_start_date.content | split('-') %}
+{%  set month = dates[1] %}
+{%  set day = dates[2] | split('T') %}
+{%  set day = day[0]  %}
 <div>
     <div class="recent-posts">
         <article class="post">
             <div class="date">
-                {% if fields.created %}
-                    <span class="day">{{ fields.created.content }}</span>
+                {% if fields.field_start_date.content %}
+                    <span class="day">{{ day }}</span>
                 {% endif %}
-                {% if fields.created_1 %}
-                    <span class="month">{{ fields.created_1.content }}</span>
+                {% if fields.field_start_date.content %}
+                    <span class="month">{{ month }}</span>
                 {% endif %}
             </div>
             {% if fields.title %}
