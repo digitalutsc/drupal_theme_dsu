@@ -1,0 +1,53 @@
+{% set display = content.field_blog_display['#items'].getValue()|first.value %}
+
+{% set date = content.field_start_date.0['#context']['value'] %}
+
+<div class="blog-posts single-post">
+
+    <article class="post post-large blog-single-post">
+        {% if node.field_thumbnail.entity.fileuri %}
+            <div class="post-image single">
+                <img class="img-thumbnail" src="{{ file_url(node.field_thumbnail.entity.fileuri) }}" alt="">
+            </div>
+        {% endif %}
+
+        <div class="post-date">
+            <span class="day">{{ date | date('d') }}</span>
+            <span class="month">{{ date | date('M') }}</span>
+        </div>
+
+        <div class="post-content">
+
+            <h2><a href="javascript:void(0);">{{ label }}</a></h2>
+
+            <div class="post-meta">
+                {% if content.field_blog_tag|render %}
+                    <span><i class="fa fa-tag"></i> {{ content.field_blog_tag }} </span>
+                {% endif %}
+            </div>
+
+            {% if content.body | render %}
+                {{ content.body }}
+            {% endif %}
+
+            <div class="post-block post-share">
+                <h3 class="heading-primary"><i class="fa fa-share"></i>{{ 'Share this event'|trans }}</h3>
+
+                <!-- AddThis Button BEGIN -->
+                <div class="addthis_toolbox addthis_default_style ">
+                    <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+                    <a class="addthis_button_tweet"></a>
+                    <a class="addthis_button_pinterest_pinit"></a>
+                    <a class="addthis_counter addthis_pill_style"></a>
+                </div>
+                <script type="text/javascript"
+                        src="//s7.addthis.com/js/300/addthis_widget.js#pubid=xa-50faf75173aadc53"></script>
+                <!-- AddThis Button END -->
+
+            </div>
+
+
+        </div>
+    </article>
+
+</div>
