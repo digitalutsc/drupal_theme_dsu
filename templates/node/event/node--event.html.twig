@@ -21,15 +21,17 @@
             <h2><a href="javascript:void(0);">{{ label }}</a></h2>
 
             <div class="post-meta">
-                {% if content.field_blog_tag|render %}
-                    <span><i class="fa fa-tag"></i> {{ content.field_blog_tag }} </span>
-                {% endif %}
+                <span><strong>Start:</strong> <u>{{ content.field_start_date['#items'].getString() | replace ({'T' : " at "}) }}</u>,</span> <span><strong>End:</strong> <u>{{ content.field_end_date['#items'].getString() | replace ({'T' : " at "}) }}</u>,</span>
+                <span><strong>Seats:</strong> {{ content.field_seats['#items'].getString() }},</span><span><strong>Participants:</strong> {{ content.field_seats_taken['#items'].getString() }}.</span>
             </div>
 
             {% if content.body | render %}
                 {{ content.body }}
             {% endif %}
 
+            {% if content.field_libcal_url | render %}
+                <a target ="_blank" href="{{ content.field_libcal_url['#items'].getString() }}" class="btn btn-primary btn-icon btn-dsu"><i class="fa fa-external-link"></i>{{ 'Regsiter here' | t }}</a> <!--<span class="arrow hlb appear-animation" data-appear-animation="rotateInUpLeft" data-appear-animation-delay="800"></span>-->
+            {% endif %}
             <div class="post-block post-share">
                 <h3 class="heading-primary"><i class="fa fa-share"></i>{{ 'Share this event'|trans }}</h3>
 

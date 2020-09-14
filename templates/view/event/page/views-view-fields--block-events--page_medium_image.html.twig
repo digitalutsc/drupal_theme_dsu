@@ -84,7 +84,7 @@
     <div class="row">
         <div class="col-md-12">
             <div class="post-meta">
-                <span><i class="fa fa-calendar"></i> {{ fields.field_start_date.content }} - {{ fields.field_end_date.content }} </span>
+                <span><i class="fa fa-calendar"></i> {{ fields.field_start_date.content | replace ({'T' : " at "}) }} - {{ fields.field_end_date.content | replace ({'T' : " at "}) }} </span>
                 <span><i class="fa fa-user"></i> {{ fields.field_seats_taken.content }} </span>
                 <a target="_blank" href="{{ fields.field_libcal_url.content }}" class="btn btn-xs btn-primary pull-right">Register here</a>
             </div>
