@@ -17,52 +17,18 @@
 
         <div class="col-md-5">
 
-            {% if display == 'gallery' %}
-
-                {% if images|length %}
-                    <div class="post-image">
-                        <div class="owl-carousel owl-theme" data-plugin-options='{"items":1}'>
-                            {% for image  in images %}
-                                <div>
-                                    <div class="img-thumbnail">
-                                        <img class="img-responsive" src="{{ file_url(image.entity.fileuri) }}" alt="">
-                                    </div>
-                                </div>
-                            {% endfor %}
-                        </div>
-                    </div>
-                {% endif %}
-
-            {% elseif display == 'video' %}
-
-                {% if medias|length %}
-                    <div class="post-video">
-                        {{ medias|first.value|raw }}
-                    </div>
-                {% endif %}
-
-            {% elseif display == 'audio' %}
-
-                {% if medias|length %}
-                    <div class="post-audio">
-                        {{ medias|first.value|raw }}
-                    </div>
-                {% endif %}
-
-            {% elseif display == 'quote' %}
-
+            {% if fields.field_featured_image.content %}
+                <div class="post-image single">
+                    <img class="img-thumbnail" src="{{ fields.field_featured_image.content }}" alt="">
+                </div>
             {% else %}
-
-                {% if fields.field_featured_image.content %}
-                    <div class="post-image single">
-                        <img class="img-thumbnail" src="{{ fields.field_featured_image.content }}" alt="">
-                    </div>
-                {% else %}
-                    <div class="post-image single">
-                        <img class="img-thumbnail" src="http://placehold.it/1280x500" alt="">
-                    </div>
-                {% endif %}
-
+                <div class="post-image single">
+                    <time class="icon">
+                        <strong>{{ fields.field_start_date.content | date('F') }}</strong><br />
+                        <span>{{ fields.field_start_date.content | date('d') }}</span>
+                    </time>
+                    <p class="text-center"><a target ="_blank" href="{{ content.field_libcal_url['#items'].getString() }}" class="btn btn-primary btn-icon btn-dsu"><i class="fa fa-external-link"></i>{{ 'Regsiter here' | t }}</a> <!--<span class="arrow hlb appear-animation" data-appear-animation="rotateInUpLeft" data-appear-animation-delay="800"></span>--></p>
+                </div>
             {% endif %}
 
         </div>
@@ -73,8 +39,15 @@
                 {% if display == 'quote' and medias|length %}
                     {{ medias|first.value|raw }}
                 {% else %}
+
                     <h2><a href="{{ path }}">{{ title }}</a></h2>
+                    <div class="post-meta">
+                        <span><i class="fa fa-calendar"></i> {{ fields.field_start_date.content | replace ({'T' : " at "}) }} - {{ fields.field_end_date.content | replace ({'T' : " at "}) }} </span>
+                        <span><i class="fa fa-user"></i> {{ fields.field_seats_taken.content }} </span>
+
+                    </div>
                     <p>{{ summary }} </p>
+
                 {% endif %}
 
             </div>
@@ -83,11 +56,7 @@
     </div>
     <div class="row">
         <div class="col-md-12">
-            <div class="post-meta">
-                <span><i class="fa fa-calendar"></i> {{ fields.field_start_date.content | replace ({'T' : " at "}) }} - {{ fields.field_end_date.content | replace ({'T' : " at "}) }} </span>
-                <span><i class="fa fa-user"></i> {{ fields.field_seats_taken.content }} </span>
-                <a target="_blank" href="{{ fields.field_libcal_url.content }}" class="btn btn-xs btn-primary pull-right">Register here</a>
-            </div>
+
         </div>
     </div>
 
