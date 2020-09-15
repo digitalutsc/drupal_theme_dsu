@@ -5,9 +5,9 @@
 <div class="blog-posts single-post">
 
     <article class="post post-large blog-single-post">
-        {% if node.field_thumbnail.entity.fileuri %}
+        {% if content.field_featured_image.0['#context']['value'] %}
             <div class="post-image single">
-                <img class="img-thumbnail" src="{{ file_url(node.field_thumbnail.entity.fileuri) }}" alt="">
+                <img class="img-thumbnail img-fit" src="{{ content.field_featured_image.0['#context']['value'] }}" alt="">
             </div>
         {% endif %}
 
@@ -21,7 +21,9 @@
             <h2><a href="javascript:void(0);">{{ label }}</a></h2>
 
             <div class="post-meta">
-                <span><strong>Start:</strong> <u>{{ content.field_start_date['#items'].getString() | replace ({'T' : " at "}) }}</u>,</span> <span><strong>End:</strong> <u>{{ content.field_end_date['#items'].getString() | replace ({'T' : " at "}) }}</u>,</span>
+                {% set starttime = content.field_start_date['#items'].getString() | split ("T") %}
+                {% set endtime = content.field_end_date['#items'].getString() | split ("T") %}
+                <span><i class="fa fa-calendar"></i> <strong>{{ starttime[1] }} - {{ endtime[1] }}</strong> </span>
                 <span><strong>Seats:</strong> {{ content.field_seats['#items'].getString() }},</span><span><strong>Participants:</strong> {{ content.field_seats_taken['#items'].getString() }}.</span>
             </div>
 

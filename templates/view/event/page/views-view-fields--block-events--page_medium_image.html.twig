@@ -10,7 +10,7 @@
 {% set commentCount = fields.comment_count.content %}
 {% set title = fields.title.content %}
 {% set author = fields.uid.content|raw %}
-{% set summary = fields.body.content %}
+{% set summary = fields.body.content  | striptags %}
 
 <article class="post post-medium">
     <div class="row">
@@ -19,15 +19,11 @@
 
             {% if fields.field_featured_image.content %}
                 <div class="post-image single">
-                    <img class="img-thumbnail" src="{{ fields.field_featured_image.content }}" alt="">
+                    <img class="img-thumbnail img-fit" src="{{ fields.field_featured_image.content }}" alt="">
                 </div>
             {% else %}
                 <div class="post-image single">
-                    <time class="icon">
-                        <strong>{{ fields.field_start_date.content | date('F') }}</strong><br />
-                        <span>{{ fields.field_start_date.content | date('d') }}</span>
-                    </time>
-                    <p class="text-center"><a target ="_blank" href="{{ content.field_libcal_url['#items'].getString() }}" class="btn btn-primary btn-icon btn-dsu"><i class="fa fa-external-link"></i>{{ 'Regsiter here' | t }}</a> <!--<span class="arrow hlb appear-animation" data-appear-animation="rotateInUpLeft" data-appear-animation-delay="800"></span>--></p>
+                    <img class="img-thumbnail img-fit" src="/sites/default/files/logo.svg" alt="">
                 </div>
             {% endif %}
 
@@ -39,15 +35,35 @@
                 {% if display == 'quote' and medias|length %}
                     {{ medias|first.value|raw }}
                 {% else %}
+                    <div class="row">
+                        <div class="col-md-9">
+                            <h2><a href="{{ path }}">{{ title }}</a></h2>
+                            <div class="post-meta">
+                                {% set starttime = fields.field_start_date.content | split ("T") %}
+                                {% set endtime = fields.field_end_date.content | split ("T") %}
+                                <!--<span><i class="fa fa-calendar"></i> {{ fields.field_start_date.content | replace ({'T' : " at "}) }} - {{ fields.field_end_date.content | replace ({'T' : " at "}) }} </span>-->
+                                <span><i class="fa fa-calendar"></i> <strong>{{ starttime[1] }} - {{ endtime[1] }}</strong> </span>
+                                <span><strong>Seats:</strong> {{ fields.field_seats.content }},</span><span><strong>Participants:</strong> {{ fields.field_seats_taken.content }}.</span>
 
-                    <h2><a href="{{ path }}">{{ title }}</a></h2>
-                    <div class="post-meta">
-                        <span><i class="fa fa-calendar"></i> {{ fields.field_start_date.content | replace ({'T' : " at "}) }} - {{ fields.field_end_date.content | replace ({'T' : " at "}) }} </span>
-                        <span><i class="fa fa-user"></i> {{ fields.field_seats_taken.content }} </span>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <time class="icon">
+                                <strong>{{ fields.field_start_date.content | date('F') }}</strong><br/>
+                                <span>{{ fields.field_start_date.content | date('d') }}</span>
+                            </time>
+                        </div>
 
                     </div>
-                    <p>{{ summary }} </p>
+                    <div class="row">
 
+                        <p>{{ summary }} </p>
+                        <p class="text-left"><a target="_blank" href="{{ fields.field_libcal_url.content }}"
+                                                class="btn btn-primary btn-icon btn-dsu"><i
+                                        class="fa fa-external-link"></i>{{ 'Regsiter here' | t }}</a>
+                            <!--<span class="arrow hlb appear-animation" data-appear-animation="rotateInUpLeft" data-appear-animation-delay="800"></span>-->
+                        </p>
+                    </div>
                 {% endif %}
 
             </div>

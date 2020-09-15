@@ -18,7 +18,7 @@
                     <h4 class="heading-primary"><a href="{{ fields.path.content }}">{{ fields.title.content }}</a></h4>
                 {% endif %}
                 {% if fields.body %}
-                    {{ fields.body.content }} <!--<a href="{{ fields.path.content }}" class="read-more">read more <i class="fa fa-angle-right"></i></a>-->
+                    {{ fields.body.content | striptags}} <!--<a href="{{ fields.path.content }}" class="read-more">read more <i class="fa fa-angle-right"></i></a>-->
                 {% endif %}
             </article>
         </div>
