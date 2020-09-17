@@ -16,17 +16,20 @@
     <div class="row">
 
         <div class="col-md-5">
-
+            <div class="post-image single">
+                <img class="img-thumbnail img-fit" src="/sites/default/files/Default_Event_Image.png" alt="">
+            </div>
+            <!--
             {% if fields.field_featured_image.content %}
                 <div class="post-image single">
                     <img class="img-thumbnail img-fit" src="{{ fields.field_featured_image.content }}" alt="">
                 </div>
             {% else %}
                 <div class="post-image single">
-                    <img class="img-thumbnail img-fit" src="/sites/default/files/logo.svg" alt="">
+                    <img class="img-thumbnail img-fit" src="/sites/default/files/Default_Event_Image.png" alt="">
                 </div>
             {% endif %}
-
+            -->
         </div>
         <div class="col-md-7">
 
@@ -60,7 +63,7 @@
                         <p>{{ summary }} </p>
                         <p class="text-left"><a target="_blank" href="{{ fields.field_libcal_url.content }}"
                                                 class="btn btn-primary btn-icon btn-dsu"><i
-                                        class="fa fa-external-link"></i>{{ 'Regsiter here' | t }}</a>
+                                        class="fa fa-external-link"></i>{{ 'Register here' | t }}</a>
                             <!--<span class="arrow hlb appear-animation" data-appear-animation="rotateInUpLeft" data-appear-animation-delay="800"></span>-->
                         </p>
                     </div>
