@@ -37,18 +37,22 @@ function dsu_form_system_theme_settings_alter(&$form, Drupal\Core\Form\FormState
  *
  * @param $thing
  */
-function print_log($thing)
-{
-  error_log(print_r($thing, true), 0);
+if (!function_exists('print_log')) {
+    function print_log($thing)
+    {
+        error_log(print_r($thing, true), 0);
+    }
 }
 
 /**
  * Debug function: display any variable to current webpage
  * @param $thing
  */
-function logging($thing)
-{
-  echo "<pre>";
-  print_r($thing);
-  echo "</pre>";
+if (!function_exists('logging')) {
+    function logging($thing)
+    {
+        echo "<pre>";
+        print_r($thing);
+        echo "</pre>";
+    }
 }
