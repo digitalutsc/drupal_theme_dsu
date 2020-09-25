@@ -21,10 +21,17 @@
             <h2><a href="javascript:void(0);">{{ label }}</a></h2>
 
             <div class="post-meta">
-                {% set starttime = content.field_start_date['#items'].getString() | split ("T") %}
-                {% set endtime = content.field_end_date['#items'].getString() | split ("T") %}
-                <span><i class="fa fa-calendar"></i> <strong>{{ starttime[1] }} - {{ endtime[1] }}</strong> </span>
-                <span><strong>Seats:</strong> {{ content.field_seats['#items'].getString() }},</span><span><strong>Participants:</strong> {{ content.field_seats_taken['#items'].getString() }}.</span>
+                <span><i class="fa fa-calendar"></i> <strong>{{ content.field_start_date['#items'].getString() | date ('h:i a') }} - {{ content.field_end_date['#items'].getString() | date ('h:i a') }} </strong></span>
+                {% if content.field_seats['#items'].getString() is not empty %}
+                    <span>
+                    <strong>Seats:</strong> {{ content.field_seats['#items'].getString() }},
+                </span>
+                {% endif %}
+                {% if content.field_seats_taken['#items'].getString() is not empty %}
+                    <span>
+                        <strong>Participants:</strong> {{ content.field_seats_taken['#items'].getString() }}.
+                    </span>
+                {% endif %}
             </div>
 
             {% if content.body | render %}
@@ -32,7 +39,10 @@
             {% endif %}
 
             {% if content.field_libcal_url | render %}
-                <a target ="_blank" href="{{ content.field_libcal_url['#items'].getString() }}" class="btn btn-primary btn-icon btn-dsu"><i class="fa fa-external-link"></i>{{ 'View All Details' | t }}</a> <!--<span class="arrow hlb appear-animation" data-appear-animation="rotateInUpLeft" data-appear-animation-delay="800"></span>-->
+                <a target="_blank" href="{{ content.field_libcal_url['#items'].getString() }}"
+                   class="btn btn-primary btn-icon btn-dsu"><i
+                            class="fa fa-external-link"></i>{{ 'View All Details' | t }}
+                </a> <!--<span class="arrow hlb appear-animation" data-appear-animation="rotateInUpLeft" data-appear-animation-delay="800"></span>-->
             {% endif %}
             <div class="post-block post-share">
                 <h3 class="heading-primary"><i class="fa fa-share"></i>{{ 'Share this event'|trans }}</h3>

@@ -42,8 +42,8 @@
                         <div class="col-md-9">
                             <h2><a href="{{ path }}">{{ title }}</a></h2>
                             <div class="post-meta">
-                                {% set starttime = fields.field_start_date.content | split ("T") %}
-                                {% set endtime = fields.field_end_date.content | split ("T") %}
+                                {# set starttime = fields.field_start_date.content | split ("T") #}
+                                {# set endtime = fields.field_end_date.content | split ("T") #}
                                 <span><i class="fa fa-calendar"></i> <strong>{{ fields.field_start_date.content | date ('h:i a') }} - {{ fields.field_end_date.content | date ('h:i a') }} </strong></span>
                                 <!--<span><i class="fa fa-calendar"></i> <strong>{{ starttime[1] }} - {{ endtime[1] }}</strong> </span>-->
                                 <!--<span><strong>Seats:</strong> {{ fields.field_seats.content }},</span><span><strong>Participants:</strong> {{ fields.field_seats_taken.content }}.</span>-->
