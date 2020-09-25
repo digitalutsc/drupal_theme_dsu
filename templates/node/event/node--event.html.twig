@@ -6,9 +6,9 @@
 
     <article class="post post-large blog-single-post">
         {% if content.field_featured_image.0['#context']['value'] %}
-            <div class="post-image single">
+            <!--<div class="post-image single">
                 <img class="img-thumbnail img-fit" src="{{ content.field_featured_image.0['#context']['value'] }}" alt="">
-            </div>
+            </div>-->
         {% endif %}
 
         <div class="post-date">
@@ -32,7 +32,7 @@
             {% endif %}
 
             {% if content.field_libcal_url | render %}
-                <a target ="_blank" href="{{ content.field_libcal_url['#items'].getString() }}" class="btn btn-primary btn-icon btn-dsu"><i class="fa fa-external-link"></i>{{ 'Regsiter here' | t }}</a> <!--<span class="arrow hlb appear-animation" data-appear-animation="rotateInUpLeft" data-appear-animation-delay="800"></span>-->
+                <a target ="_blank" href="{{ content.field_libcal_url['#items'].getString() }}" class="btn btn-primary btn-icon btn-dsu"><i class="fa fa-external-link"></i>{{ 'View All Details' | t }}</a> <!--<span class="arrow hlb appear-animation" data-appear-animation="rotateInUpLeft" data-appear-animation-delay="800"></span>-->
             {% endif %}
             <div class="post-block post-share">
                 <h3 class="heading-primary"><i class="fa fa-share"></i>{{ 'Share this event'|trans }}</h3>
