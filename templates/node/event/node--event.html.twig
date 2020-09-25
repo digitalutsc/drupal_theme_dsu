@@ -22,15 +22,8 @@
 
             <div class="post-meta">
                 <span><i class="fa fa-calendar"></i> <strong>{{ content.field_start_date['#items'].getString() | date ('h:i a') }} - {{ content.field_end_date['#items'].getString() | date ('h:i a') }} </strong></span>
-                {% if content.field_seats['#items'].getString() is not empty %}
-                    <span>
-                    <strong>Seats:</strong> {{ content.field_seats['#items'].getString() }},
-                </span>
-                {% endif %}
-                {% if content.field_seats_taken['#items'].getString() is not empty %}
-                    <span>
-                        <strong>Participants:</strong> {{ content.field_seats_taken['#items'].getString() }}.
-                    </span>
+                {% if content.field_calendar_name['#items'].getString() is not empty %}
+                    <span><strong>Calendar:</strong> {{ content.field_calendar_name['#items'].getString() }}.</span>
                 {% endif %}
             </div>
 
