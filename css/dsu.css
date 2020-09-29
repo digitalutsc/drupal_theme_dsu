@@ -133,3 +133,36 @@ time.icon:hover, time.icon:focus
     80%  { transform: rotate(6deg)  skewY(-2deg); }
     100% { transform: rotate(0deg)  skewY(0deg); }
 }
+
+/**
+for search block
+ */
+footer .search-block-form{position: relative;}
+footer .search-block-form input[type="submit"]{
+    background: url(http://refaktor.org/drupal/porto/themes/porto/img/icon-search.png) no-repeat top left;
+    text-indent: -999em;
+    width: 28px;
+    height: 30px;
+    border: none;
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin-top: 9px;
+}
+footer .search-block-form input[type="submit"]:hover{
+    background: url(http://refaktor.org/drupal/porto/themes/porto/img/icon-search.png) no-repeat top left;
+}
+footer .search-block-form input[type="submit"]:focus{outline: none;}
+.simplenews-subscriber-form input[type="email"]{
+    outline: none;
+    height: 34px;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #555;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background: #DADADA;
+}
