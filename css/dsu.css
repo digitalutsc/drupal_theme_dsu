@@ -177,4 +177,7 @@ footer .search-block-form input[type="submit"]:focus{outline: none;}
         height: 100px;
         text-align: center !important;
     }
+    .sticky-header-active #header .h-default.header-btn-collapse-nav {
+        margin-top: 10 !important;
+    }
 }
