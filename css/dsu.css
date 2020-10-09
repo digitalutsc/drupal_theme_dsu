@@ -179,5 +179,11 @@ footer .search-block-form input[type="submit"]:focus{outline: none;}
     }
     .sticky-header-active #header .h-default.header-btn-collapse-nav {
         margin-top: 10px !important;
+        margin-right: 45% !important;
+    }
+}
+@media (max-width: 991px) {
+    #header .header-btn-collapse-nav {
+        margin-right: 45% !important;
     }
 }
