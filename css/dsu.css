@@ -171,4 +171,9 @@ footer .search-block-form input[type="submit"]:focus{outline: none;}
     .site-branding__text h6 {
         margin-top: 120px !important;
     }
+    .header-logo {
+        width: 100% !important;
+        height: 100px;
+        text-align: center !important;
+    }
 }
