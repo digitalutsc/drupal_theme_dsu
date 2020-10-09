@@ -166,3 +166,9 @@ footer .search-block-form input[type="submit"]:focus{outline: none;}
     border-radius: 4px;
     background: #DADADA;
 }
+
+@media (max-width: 479px) {
+    .site-branding__text h6 {
+        margin-top: 120px !important;
+    }
+}
