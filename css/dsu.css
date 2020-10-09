@@ -170,6 +170,7 @@ footer .search-block-form input[type="submit"]:focus{outline: none;}
 @media (max-width: 479px) {
     .site-branding__text h6 {
         margin-top: 120px !important;
+        font-size: 0.9em !important;
     }
     .header-logo {
         width: 100% !important;
