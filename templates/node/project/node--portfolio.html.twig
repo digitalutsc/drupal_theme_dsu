@@ -74,15 +74,15 @@
 							<ul>
 								<!--<li>
 									<i class="fa fa-calendar"></i>
-									{% set createdDate = node.getCreatedTime|date('d F Y') %}
-									{{ createdDate }}
+									{#  set createdDate = node.getCreatedTime|date('d F Y') #}
+									{#  createdDate #}
 								</li>-->
-								{% if content.field_portfolio_category | render is not empty %}
-								<li>
+								{#  if content.field_portfolio_category | render is not empty #}
+								<!--<li>
 									<i class="fa fa-tags"></i>
-									{{ content.field_portfolio_category }}
-								</li>
-								{% endif %}
+									{#  content.field_portfolio_category #}
+								</li>-->
+								{#  endif #}
 							</ul>
 						</div>
 					</div>
@@ -440,10 +440,10 @@
 									{{ createdDate }}
 								</li>-->
 								{% if content.field_portfolio_category | render is not empty %}
-								<li>
+								<!--<li>
 									<i class="fa fa-tags"></i>
 									{{ content.field_portfolio_category }}
-								</li>
+								</li>-->
 								{% endif %}
 							</ul>
 						</div>
