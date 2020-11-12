@@ -187,3 +187,16 @@ footer .search-block-form input[type="submit"]:focus{outline: none;}
         margin-right: 45% !important;
     }
 }
+
+
+/* Captcha */
+.captcha {
+    width: 100% !important;
+    text-align: left !important;
+    max-width: none !important;
+    heigh:auto;
+    background: #ffffff;
+}
+.captcha input {
+    border: 1px solid #ccc !important;
+}
