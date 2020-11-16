@@ -194,7 +194,7 @@ footer .search-block-form input[type="submit"]:focus{outline: none;}
     width: 100% !important;
     text-align: left !important;
     max-width: none !important;
-    heigh:auto;
+    height:auto;
     background: #ffffff;
 }
 .captcha input {
