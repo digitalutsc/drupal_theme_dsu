@@ -200,3 +200,8 @@ footer .search-block-form input[type="submit"]:focus{outline: none;}
 .captcha input {
     border: 1px solid #ccc !important;
 }
+
+
+.profile-photo {
+ max-height:252px !important;
+}
