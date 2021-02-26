@@ -31,12 +31,63 @@
                 {{ content.body }}
             {% endif %}
 
-            {% if content.field_libcal_url | render %}
-                <a target="_blank" href="{{ content.field_libcal_url['#items'].getString() }}"
-                   class="btn btn-primary btn-icon btn-dsu"><i
-                            class="fa fa-external-link"></i>{{ 'View All Details' | t }}
-                </a> <!--<span class="arrow hlb appear-animation" data-appear-animation="rotateInUpLeft" data-appear-animation-delay="800"></span>-->
+
+            <!-- render the map if geolocation field is valid -->
+            {% if content.field_geolocation.0['#context']['value'] is defined %}
+              <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+                    integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+                    crossorigin=""/>
+              <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+                      integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+                      crossorigin=""></script>
+              <style>
+                #mapid { height: 300px; width:500px; margin-bottom: 25px}
+              </style>
+
+              <div id="mapid"></div>
+
+              <script>
+                  //var mymap = L.map('mapid').setView([], 13);
+                  var mymap = L.map('mapid',{
+                    center: [{{ content.field_geolocation.0['#context']['value'] }}],
+                    zoom: 50
+                  });
+                  L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
+                    maxZoom: 18,
+                    attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, ' +
+                      'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+                    id: 'mapbox/streets-v11',
+                    tileSize: 512,
+                    zoomOffset: -1
+                  }).addTo(mymap);
+
+                  (function() {
+                        var control = new L.Control({position:'topleft'});
+                        control.onAdd = function(mymap) {
+                          var azoom = L.DomUtil.create('a','resetzoom');
+                          azoom.innerHTML = "[Reset]";
+                          L.DomEvent
+                            .disableClickPropagation(azoom)
+                            .addListener(azoom, 'click', function() {
+                              mymap.setView(mymap.options.center, mymap.options.zoom);
+                            },azoom);
+                          return azoom;
+                        };
+                        return control;
+                  }()).addTo(mymap);
+
+                  var marker = L.marker([{{ content.field_geolocation.0['#context']['value'] }}]).addTo(mymap);
+              </script>
             {% endif %}
+            <!-- End map -->
+
+            {% if content.field_libcal_url | render %}
+              <a target="_blank" href="{{ content.field_libcal_url['#items'].getString() }}"
+                 class="btn btn-primary btn-icon btn-dsu"><i
+                  class="fa fa-external-link"></i>{{ 'View All Details' | t }}
+              </a> <!--<span class="arrow hlb appear-animation" data-appear-animation="rotateInUpLeft" data-appear-animation-delay="800"></span>-->
+            {% endif %}
+
             <div class="post-block post-share">
                 <h3 class="heading-primary"><i class="fa fa-share"></i>{{ 'Share this event'|trans }}</h3>
 
