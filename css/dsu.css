@@ -205,3 +205,16 @@ footer .search-block-form input[type="submit"]:focus{outline: none;}
 .profile-photo {
  max-height:252px !important;
 }
+
+.feature-box .feature-box-icon-dsu {
+    float: left;
+}
+
+.feature-box .feature-box-info {
+  padding-left: 110px;
+}
+
+.grid-dsu-row {
+  border-bottom: 1px solid rgba(219,219,219, 0.5);
+  padding-top: 20px;
+}

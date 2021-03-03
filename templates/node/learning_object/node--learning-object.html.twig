@@ -1,0 +1,36 @@
+{% set thumbnail = node.field_learningobject_tn %}
+
+<div class="blog-posts single-post">
+
+  {% if content.field_embed_code | render %}
+    <p style="width:auto !important">{{ content.field_embed_code }}</p>
+  {% endif %}
+
+    {% if content.body | render %}
+      <p>{{ content.body }}</p>
+    {% endif %}
+
+    <p class="text-left">
+      <a target="_blank" href="{{ content.field_view_and_download.0['#url'] }}"
+         class="btn btn-primary btn-icon btn-dsu"><i
+          class="fa fa-external-link"></i>{{ 'View and Download' | t }}
+      </a>
+    </p>
+
+    <div class="post-block post-share">
+      <h3 class="heading-primary"><i class="fa fa-share"></i>{{ 'Share this event'|trans }}</h3>
+
+      <!-- AddThis Button BEGIN -->
+      <div class="addthis_toolbox addthis_default_style ">
+        <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+        <a class="addthis_button_tweet"></a>
+        <a class="addthis_button_pinterest_pinit"></a>
+        <a class="addthis_counter addthis_pill_style"></a>
+      </div>
+      <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=xa-50faf75173aadc53"></script>
+      <!-- AddThis Button END -->
+
+    </div>
+
+
+</div>

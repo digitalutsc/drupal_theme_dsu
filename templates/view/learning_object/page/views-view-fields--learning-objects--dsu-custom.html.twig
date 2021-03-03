@@ -1,0 +1,17 @@
+
+<div class="feature-box">
+  <div class="feature-box-icon-dsu">{{ fields.field_learningobject_tn.content }}</div>
+
+  <div class="feature-box-info">
+    <h4 class="heading-primary mb-none">{{ fields.title.content }}</h4>
+
+    <p class="tall">{{ fields.body.content }}</p>
+
+    <p class="text-left">
+        <a target="_blank" href="{{ row._entity.field_view_and_download.0.url }}"
+                            class="btn btn-primary btn-icon btn-dsu" target="_blank">
+          <i class="fa fa-external-link"></i> {{ 'Explore' | t }}
+        </a>
+    </p>
+  </div>
+</div>
