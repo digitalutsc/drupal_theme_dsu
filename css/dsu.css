@@ -181,6 +181,7 @@ footer .search-block-form input[type="submit"]:focus{outline: none;}
         margin-top: 10px !important;
         margin-right: 45% !important;
     }
+    .views-col { width:100% !important; }
 }
 @media (max-width: 991px) {
     #header .header-btn-collapse-nav {
