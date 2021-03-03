@@ -6,10 +6,10 @@
     <h4 class="heading-primary mb-none">{{ fields.title.content }}</h4>
 
     <p class="tall">{{ fields.body.content }}</p>
-
     <p class="text-left">
-        <a target="_blank" href="{{ row._entity.field_view_and_download.0.url }}"
-                            class="btn btn-primary btn-icon btn-dsu" target="_blank">
+        <!--<a target="_blank" href="{{ row._entity.field_view_and_download.0.url }}" -->
+      <a target="_blank" href="{{ path('entity.node.canonical', {'node':  row._entity.id}) }}"
+         class="btn btn-primary btn-icon btn-dsu" target="_blank">
           <i class="fa fa-external-link"></i> {{ 'Explore' | t }}
         </a>
     </p>
