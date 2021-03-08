@@ -139,7 +139,7 @@ for search block
  */
 footer .search-block-form{position: relative;}
 footer .search-block-form input[type="submit"]{
-    background: url(http://refaktor.org/drupal/porto/themes/porto/img/icon-search.png) no-repeat top left;
+    background: url(https://refaktor.org/drupal/porto/themes/porto/img/icon-search.png) no-repeat top left;
     text-indent: -999em;
     width: 28px;
     height: 30px;
@@ -150,7 +150,7 @@ footer .search-block-form input[type="submit"]{
     margin-top: 9px;
 }
 footer .search-block-form input[type="submit"]:hover{
-    background: url(http://refaktor.org/drupal/porto/themes/porto/img/icon-search.png) no-repeat top left;
+    background: url(https://refaktor.org/drupal/porto/themes/porto/img/icon-search.png) no-repeat top left;
 }
 footer .search-block-form input[type="submit"]:focus{outline: none;}
 .simplenews-subscriber-form input[type="email"]{
