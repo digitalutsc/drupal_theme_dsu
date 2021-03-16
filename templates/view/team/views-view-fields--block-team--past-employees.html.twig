@@ -4,7 +4,7 @@
 <div class="col-md-3 col-sm-6 col-xs-12 isotope-item {{ position | replace({' ': '-'}) }}">
     <span class="thumb-info thumb-info-hide-wrapper-bg">
         <span class="thumb-info-wrapper">
-            <a href="{{ url }}">
+            <a href="{{ path('entity.node.canonical', {'node':  row._entity.id}) }}">
 
                     <img src="{{ file_url(avatar.entity.fileuri) }}" alt="" class="img-responsive">
 
