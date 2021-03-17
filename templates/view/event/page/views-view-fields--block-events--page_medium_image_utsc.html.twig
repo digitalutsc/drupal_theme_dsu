@@ -12,14 +12,15 @@
 {% set author = fields.uid.content|raw %}
 {% set summary = fields.body.content  | striptags %}
 
-<article class="post post-medium">
+<li class="col-md-12 isotope-item mt-xl {{ (row._entity.field_past_event.value) ? "category47" : "category48" }}">
+  <article class="post post-medium">
     <div class="row">
 
-        <div class="col-md-5">
-            <div class="post-image single">
-                <img class="img-thumbnail img-fit" src="/sites/default/files/Default_Event_Image.png" alt="">
-            </div>
-            <!--
+      <div class="col-md-5">
+        <div class="post-image single">
+          <img class="img-thumbnail img-fit" src="/sites/default/files/Default_Event_Image.png" alt="">
+        </div>
+        <!--
             {% if fields.field_featured_image.content %}
                 <div class="post-image single">
                     <img class="img-thumbnail img-fit" src="{{ fields.field_featured_image.content }}" alt="">
@@ -30,55 +31,60 @@
                 </div>
             {% endif %}
             -->
-        </div>
-        <div class="col-md-7">
+      </div>
+      <div class="col-md-7">
 
-            <div class="post-content">
+        <div class="post-content">
 
-                {% if display == 'quote' and medias|length %}
-                    {{ medias|first.value|raw }}
-                {% else %}
-                    <div class="row">
-                        <div class="col-md-9">
-                            <h2><a href="{{ path }}">{{ title }}</a></h2>
-                            <div class="post-meta">
-                                {# set starttime = fields.field_start_date.content | split ("T") #}
-                                {# set endtime = fields.field_end_date.content | split ("T") #}
-                                <span><i class="fa fa-calendar"></i> <strong>{{ fields.field_start_date.content | date ('h:i a') }} - {{ fields.field_end_date.content | date ('h:i a') }} </strong></span>
-                                <!--<span><i class="fa fa-calendar"></i> <strong>{{ starttime[1] }} - {{ endtime[1] }}</strong> </span>-->
-                                <!--<span><strong>Seats:</strong> {{ fields.field_seats.content }},</span><span><strong>Participants:</strong> {{ fields.field_seats_taken.content }}.</span>-->
-                                {% if fields.field_calendar_name.content is not empty %}
-                                    <span><strong>Calendar:</strong> {{ fields.field_calendar_name.content }},</span>
-                                {% endif %}
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <time class="icon">
-                                <strong>{{ fields.field_start_date.content | date('F') }}</strong><br/>
-                                <span>{{ fields.field_start_date.content | date('d') }}</span>
-                            </time>
-                        </div>
-
-                    </div>
-                    <div class="row">
-
-                        <p>{{ summary }} </p>
-                        <p class="text-left"><a target="_blank" href="{{ fields.field_libcal_url.content }}"
-                                                class="btn btn-primary btn-icon btn-dsu"><i
-                                        class="fa fa-external-link"></i>{{ 'Explore' | t }}</a>
-                            <!--<span class="arrow hlb appear-animation" data-appear-animation="rotateInUpLeft" data-appear-animation-delay="800"></span>-->
-                        </p>
-                    </div>
-                {% endif %}
+          {% if display == 'quote' and medias|length %}
+            {{ medias|first.value|raw }}
+          {% else %}
+            <div class="row">
+              <div class="col-md-9">
+                <h2><a href="{{ path }}">{{ title }}</a></h2>
+                <div class="post-meta">
+                  {# set starttime = fields.field_start_date.content | split ("T") #}
+                  {# set endtime = fields.field_end_date.content | split ("T") #}
+                  <span><i
+                      class="fa fa-calendar"></i> <strong>{{ fields.field_start_date.content | date ('h:i a') }} - {{ fields.field_end_date.content | date ('h:i a') }} </strong></span>
+                  <!--<span><i class="fa fa-calendar"></i> <strong>{{ starttime[1] }} - {{ endtime[1] }}</strong> </span>-->
+                  <!--<span><strong>Seats:</strong> {{ fields.field_seats.content }},</span><span><strong>Participants:</strong> {{ fields.field_seats_taken.content }}.</span>-->
+                  {% if fields.field_calendar_name.content is not empty %}
+                    <span><strong>Calendar:</strong> {{ fields.field_calendar_name.content }},</span>
+                  {% endif %}
+                </div>
+              </div>
+              <div class="col-md-3">
+                <time class="icon">
+                  <strong>{{ fields.field_start_date.content | date('F') }}</strong><br/>
+                  <span>{{ fields.field_start_date.content | date('d') }}</span>
+                  {% if ((row._entity.field_past_event.value)) %}
+                    <i class="fa fa-check" style="font-size: 2rem;color: green;position: fixed;top: 38px;left: 29px;"></i>
+                  {% endif %}
+                </time>
+              </div>
 
             </div>
+            <div class="row">
+
+              <p>{{ summary }} </p>
+              <p class="text-left"><a target="_blank" href="{{ fields.field_libcal_url.content }}"
+                                      class="btn btn-primary btn-icon btn-dsu"><i
+                    class="fa fa-external-link"></i>{{ 'Explore' | t }}</a>
+                <!--<span class="arrow hlb appear-animation" data-appear-animation="rotateInUpLeft" data-appear-animation-delay="800"></span>-->
+              </p>
+            </div>
+          {% endif %}
+
         </div>
+      </div>
 
     </div>
     <div class="row">
-        <div class="col-md-12">
+      <div class="col-md-12">
 
-        </div>
+      </div>
     </div>
 
-</article>
+  </article>
+</li>
