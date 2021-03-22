@@ -70,10 +70,7 @@
                 <time class="icon">
                   <strong>{{ fields.field_start_date.content | date('F') }}</strong>
                   <span>{{ fields.field_start_date.content | date('d') }}</span>
-                  {% if ((row._entity.field_past_event.value)) %}
-                    <i class="fa fa-check"
-                       style="font-size: 2rem;color: green;position: fixed;top: 38px;left: 29px;"></i>
-                  {% endif %}
+                  
                 </time>
               </div>
 
