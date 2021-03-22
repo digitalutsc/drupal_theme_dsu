@@ -1,9 +1,18 @@
 <div class="row">
     <div class="col-md-12">
         <div class="blog-posts">
+          <ul class="nav nav-pills nav-pills-xs portfolio-filter-group mb-xl combination-filter" data-sort-id="events" data-option-key="filter">
+            <li data-option-value="*" class="active">
+              <a href="#">SHOW ALL</a>
+            </li>
+            <li data-option-value=".category48" ><a href="#">UPCOMING</a></li>
+            <li data-option-value=".category47" ><a href="#">PAST</a></li>
+          </ul>
+          <ul class="portfolio-list sort-destination" data-sort-id="events">
             {% for row in rows %}
                 {{ row.content }}
             {% endfor %}
+          </ul>
         </div>
     </div>
 </div>
