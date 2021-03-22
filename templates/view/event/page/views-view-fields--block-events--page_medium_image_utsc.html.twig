@@ -8,7 +8,7 @@
 {% set tagsContent = fields.field_blog_tag.content|raw %}
 {% set path = fields.path.content %}
 {% set commentCount = fields.comment_count.content %}
-{% set title = fields.title.content %}
+{% set title = fields.title.content|raw %}
 {% set author = fields.uid.content|raw %}
 {% set summary = fields.body.content  | striptags %}
 
@@ -41,13 +41,18 @@
           {% else %}
             <div class="row">
               <div class="col-md-9">
-                <!--<h2><a href="{{ path }}">{{ title }}</a></h2>-->
-                <h2>
-			<a href="{{ path }}" class="notification">
-  				<span>{{ title }}</span>
-  				<span class="badge">Past</span>
-			</a>
-                </h2>
+
+                {% if (row._entity.field_past_event.value)  %}
+                  <h2>
+                    <a href="{{ path('entity.node.canonical', {'node':  row._entity.id}) }}" class="notification">
+                      <span>{{ title|striptags }}</span>
+                      <span class="badge">Past</span>
+                    </a>
+                  </h2>
+
+                {% else %}
+                  <h2><a href="{{ path }}">{{ title }}</a></h2>
+                {% endif %}
 
                 <div class="post-meta">
                   {# set starttime = fields.field_start_date.content | split ("T") #}
@@ -66,7 +71,8 @@
                   <strong>{{ fields.field_start_date.content | date('F') }}</strong>
                   <span>{{ fields.field_start_date.content | date('d') }}</span>
                   {% if ((row._entity.field_past_event.value)) %}
-                    <i class="fa fa-check" style="font-size: 2rem;color: green;position: fixed;top: 38px;left: 29px;"></i>
+                    <i class="fa fa-check"
+                       style="font-size: 2rem;color: green;position: fixed;top: 38px;left: 29px;"></i>
                   {% endif %}
                 </time>
               </div>
