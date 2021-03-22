@@ -6,7 +6,7 @@
 }
 
 .notification:hover {
-  text-decoration: underline;
+  /*text-decoration: underline;*/
 }
 
 .notification .badge {
@@ -15,6 +15,7 @@
   border-radius: 50%;
   background: #002554;
   color: white;
+    right: -50px;
 }
 
 .site-branding__text {
