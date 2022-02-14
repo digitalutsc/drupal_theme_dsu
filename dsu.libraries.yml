@@ -3,5 +3,5 @@ global-styling:
   css:
     base:
       css/dsu.css: {}
-
-
+    components:
+      css/field.css: {}
