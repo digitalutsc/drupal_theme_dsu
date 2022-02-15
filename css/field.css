@@ -24,3 +24,18 @@
 .breadcrumb-link {
   color: #0088cc;
 }
+
+.view-taxonomy-term th,
+.view-taxonomy-term td {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-right: 50px;
+  border-bottom: 1px solid rgb(230, 225, 225);
+}
+.view-taxonomy-term td:last-child,
+.view-taxonomy-term th:last-child {
+  padding-right: 0px;
+}
+.view-taxonomy-term tr:first-child th {
+  border-bottom: 2px solid black;
+}
