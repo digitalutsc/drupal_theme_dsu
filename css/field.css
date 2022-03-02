@@ -25,6 +25,10 @@
   color: #0088cc;
 }
 
+.page-header .breadcrumb ol a {
+  text-decoration: underline;
+}
+
 .view-taxonomy-term th,
 .view-taxonomy-term td {
   padding-top: 10px;
@@ -35,6 +39,7 @@
 .view-taxonomy-term td:last-child,
 .view-taxonomy-term th:last-child {
   padding-right: 0px;
+  border-bottom: 0px;
 }
 .view-taxonomy-term tr:first-child th {
   border-bottom: 2px solid black;
